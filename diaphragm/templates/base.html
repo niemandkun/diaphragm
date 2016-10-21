@@ -4,8 +4,12 @@
 
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
     <link rel="stylesheet" href="static/styles.css">
+    <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
+    {% block head %}{% endblock %}
 </head>
 
 <body>{% block body %}{% endblock %}</body>
