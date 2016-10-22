@@ -12,6 +12,19 @@ app.config.from_object('config.DebugConfig')
 def index():
     return render_template("layout.html")
 
+# @app.route("/blog")
+# def blog():
+#     return "<div>blog</div>"
+
+@app.route("/projects")
+def projects():
+    from time import sleep
+    sleep(2)
+    return "<div>projects</div>"
+
+@app.route("/about")
+def about():
+    return "<div>about</div>"
 
 if __name__ == "__main__":
-    app.run("127.0.0.1", 8080)
+    app.run("0.0.0.0", 8080)
