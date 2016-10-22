@@ -3,6 +3,18 @@ function switchNavigation() {
     switchElement("cover", "visible", "hidden");
 }
 
+function hideNavigation() {
+    setElement("navigation", "open", "closed");
+    setElement("cover", "visible", "hidden");
+}
+
+function setElement(cls, oldState, newState) {
+    applyToAll(cls, function(elem) {
+        elem.className = elem.className.replace(oldState,
+            newState);
+    });
+}
+
 function switchElement(cls, firstState, secondState) {
     applyToAll(cls, function(elem) {
         elem.className = exchangeSubstring(elem.className,

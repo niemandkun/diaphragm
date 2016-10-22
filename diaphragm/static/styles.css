@@ -129,7 +129,7 @@ body {
     margin-top: 3em;
     flex-wrap: wrap;
     flex-direction: row;
-    align-content: flex-start;
+    align-content: center;
 }
 
 .content div {
@@ -150,6 +150,26 @@ body {
 
 .footer a {
     color: grey;
+}
+
+.content div.error {
+    background-color: transparent;
+    text-align: center;
+    box-shadow: none;
+    margin-top: 4em;
+    color: grey;
+}
+
+.spinner {
+    flex: 1;
+    background-color: transparent;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+}
+
+.expand {
+    flex: 1;
 }
 
 @media screen and (min-width: 480px) {
