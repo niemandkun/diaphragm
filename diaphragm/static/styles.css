@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    transition-duration: 0.1s;
 }
 
 html {
@@ -85,7 +84,6 @@ body {
     display: flex;
     z-index: 9000;
     flex-wrap: nowrap;
-    transition-duration: 0s;
 }
 
 .title {
@@ -117,6 +115,14 @@ body {
     text-decoration: none;
 }
 
+.menu,
+.cover,
+.header,
+.navigation,
+.navigation a {
+    transition-duration: 0.2s;
+}
+
 .content {
     flex: 1;
     display: flex;
@@ -133,7 +139,6 @@ body {
     border-radius: 2px;
     margin: 0.3em 0em;
     background-color: white;
-    transition-duration: 0.1s;
     box-shadow: 0 1px 8px rgba(0,0,0,.2);
 }
 
