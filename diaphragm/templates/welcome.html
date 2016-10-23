@@ -1,0 +1,13 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}niemandkun's lair{% endblock %}
+
+{% block content %}
+<div class="welcome">
+    Welcome to niemandkun's&nbsp;lair
+</div>
+{% endblock %}

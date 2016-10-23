@@ -1,0 +1,164 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}About me | nl{% endblock %}
+
+{% block content %}
+<div class="avatar">
+    <div class="expand"></div>
+    <img src="static/avatar.jpg">
+    <div class="expand"></div>
+</div>
+
+<div>
+    <h1>About me</h1>
+
+    <p>
+        Hi! My name is <i><b>Ivan Poroshin</b></i> and I'm third year computer science bachelor
+        student and enthusiastic programmer, interested in robotics,
+        computer vision, bioinformatics and more.
+    </p>
+
+    <p>Among the internets you can also find me by nickname <i><b>niemandkun</b></i>.</p>
+</div>
+
+<div>
+    <p>
+        I have an interests in a various fields, but the most passionate I am in:
+        <ul>
+            <li>Robotics</li>
+            <li>Bioinformatics</li>
+            <li>Computer vision</li>
+            <li>Machine learning</li>
+            <li>Gamedev and computer graphics</li>
+            <li>Functional programming</li>
+        </ul>
+    </p>
+</div>
+
+<div>
+    <p>
+        My current location is Yekaterinburg. Here I'm studying math and
+        CS as a student of <a href="http://imkn.urfu.ru">The Institute of
+        Mathematics and Computer Sciences</a> of
+        <a href="http://urfu.ru/en/">The Ural Federal University</a>.
+    </p>
+</div>
+
+<div style="min-width: 90%">
+    <h2>Science</h2>
+    <p>
+        I've spent last summer as a volunteer worker in The Laboratory of
+        Mathematical Modelling with Supercomputer Technologies at
+        <a href="http://iip.uran.ru">The Institute of Immunology and Physiology RAS</a>,
+        where I've got a chance to help the researchers in their study of
+        how to cure human heart diseases.
+    </p>
+    <p>
+        There I've learnt computer vision and have written a lot of Python code
+        using NumPy, SciPy, pandas, scikit-learn, scikit-image and OpenCV.
+    </p>
+    <p>
+        As a revard I've got a chance to attend
+        <a href="http://conf.bionet.nsc.ru/bgrssb2016/?lang=en">The
+        International Conference On Bioinformatics of Genome Regulation
+        and Structure/Systems Biology</a> at Novosibirsk State University
+        as a listener.
+        There I've learnt a lot about biology.
+    </p>
+    <p>
+        Also, in September 2016 I've attended
+        <a href="http://astro.brics.urfu.ru/en/astrodata2016/">BRICS
+        Astronomy Workshop</a> as a listener interested in astronomical
+        data processing.
+    </p>
+</div>
+
+<div style="min-width: 90%">
+    <h2>Programming</h2>
+    <p>
+        After the first year of studying I've decided to participate with
+        my mates in a local competitions on virtual robotics, where
+        participants were asked to write a program for a fully
+        autonomous robot acting in a virtual environment.
+    </p>
+    <p>
+        Our team was lucky enough to take the first place with the solution
+        that uses only some graph algorithms and a finite-state automaton.
+    </p>
+    <p>
+        Now I'm taking a part in the development process of a new competitions,
+        which involves development and implementation of the contest's rules,
+        development of the competitions Unity3D app and the infrastructure
+        maintenance.
+    </p>
+</div>
+
+<div>
+    <p>
+        As a first years student I wrote a bunch of code on C#, Java and
+        Python.
+
+        I'm still loving these programming languages and still using them in my
+        daily work.
+    </p>
+    <p>
+        Furthermore, I've became familiar with Prolog, Haskell and Scala
+        and fallen in love with the functional programming.
+        Now I'm solving
+        <a href="http://rosalind.info/">Rosalind</a> problems
+        using Haskell.
+    </p>
+</div>
+
+<div>
+    <p>
+        As a hobby I'm doing various gamedev, web or assembler stuff. Some of
+        that stuff is available on my <a onclick="ref('/projects')">projects</a>
+        page.
+    </p>
+    <p>
+        Also, I have a
+        <a href="https://steamcommunity.com/profiles/76561198058887699">Steam</a>
+        profile. So, if you'd like to play together, just let me know.
+    </p>
+    <p>
+        Also, I have a
+        <a href="http://rosalind.info/users/niemandkun">Rosalind</a> profile.
+    </p>
+</div>
+
+<div>
+    <h2>This Website</h2>
+    <p>
+        This website is extremely lightweight.
+        It was built from scratch with no JS and CSS frameworks.
+        Server is locating at my home on a
+        <a href="https://www.raspberrypi.org/">Raspberry Pi</a> microcomputer.
+    </p>
+    <p>
+        <a href="http://flask.pocoo.org/">Flask</a> is used to generate and send
+        pages via Ajax.
+    </p>
+    <p>
+        Source code for this website is published under MIT License and
+        available for everyone on
+        <a href="https://github.com/niemandkun/diaphragm">GitHub</a>.
+    </p>
+</div>
+
+<div>
+    <h2>Contacts</h2>
+
+    <p>If you want to contact me, you can:</p>
+
+    <ul>
+        <li>Send me an <a href="mailto:niemandkun@yandex.ru">email</a></li>
+        <li>Follow me on <a href="https://vk.com/niemandkun">VK</a></li>
+        <li>Send me a message on <a href="https://github.com/niemandkun">GitHub</a></li>
+    </ul>
+</div>
+{% endblock %}

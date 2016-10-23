@@ -11,6 +11,11 @@ html {
 
 a {
     color: #01579b;
+    text-decoration: underline;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 body {
@@ -115,6 +120,20 @@ body {
     text-decoration: none;
 }
 
+.content > .avatar {
+    flex: 1;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar img {
+    flex: 2;
+    width: 15em;
+    border-radius: 50%;
+}
+
 .menu,
 .cover,
 .header,
@@ -129,10 +148,11 @@ body {
     margin-top: 3em;
     flex-wrap: wrap;
     flex-direction: row;
-    align-content: center;
+    align-content: flex-start;
+    justify-content: center;
 }
 
-.content div {
+.content > div {
     flex: 1;
     padding: 1em;
     min-width: 300px;
@@ -152,7 +172,9 @@ body {
     color: grey;
 }
 
-.content div.error {
+.content div.error,
+.content div.welcome,
+.content div.coming-soon {
     background-color: transparent;
     text-align: center;
     box-shadow: none;
@@ -204,7 +226,7 @@ body {
         margin-top: 3em;
     }
 
-    .content div {
+    .content > div {
         margin: 0.5em 0.3em;
     }
 }
@@ -234,9 +256,15 @@ body {
         margin-top: 1em;
     }
 
-    .content div {
+    .content > div {
         box-shadow: none;
         background-color: white;
+        padding: 0;
+        margin: 1em;
+    }
+
+    .content > .avatar {
+        display: flex;
     }
 
     .footer {
@@ -249,6 +277,10 @@ body {
         width: 900px;
     }
 
+    .content {
+        padding: 0;
+    }
+
     .header {
         margin-top: 2em;
     }
@@ -257,7 +289,7 @@ body {
         padding: 0;
     }
 
-    .header .footer {
+    .header, .footer {
         padding: 0.5em 0;
     }
 }

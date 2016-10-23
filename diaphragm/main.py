@@ -1,30 +1,46 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template
+import json
+
+from flask import Flask
+from flask import render_template
 
 
 app = Flask(__name__, static_folder="static")
-app.config.from_object('config.DebugConfig')
+app.config.from_object('config.ProductionConfig')
+
+
+def render_ajax(*args, **kwargs):
+    kwargs['dumps'] = json.dumps
+    kwargs['standalone'] = True
+    return render_template(*args, **kwargs)
 
 
 @app.route("/")
-@app.route("/index.html")
-def index():
+@app.route("/<address>")
+def root(address=None):
     return render_template("layout.html")
 
-# @app.route("/blog")
-# def blog():
-#     return "<div>blog</div>"
 
-@app.route("/projects")
-def projects():
-    from time import sleep
-    sleep(2)
-    return "<div>projects</div>"
+@app.route("/api/")
+def welcome():
+    return render_ajax("welcome.html")
 
-@app.route("/about")
+
+@app.route("/api/about")
 def about():
-    return "<div>about</div>"
+    return render_ajax("about.html")
+
+
+@app.route("/api/blog")
+def blog():
+    return render_ajax("coming_soon.html")
+
+
+@app.route("/api/projects")
+def projects():
+    return render_ajax("coming_soon.html")
+
 
 if __name__ == "__main__":
     app.run("0.0.0.0", 8080)

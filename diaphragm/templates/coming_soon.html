@@ -1,0 +1,13 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}Coming soon | nl{% endblock %}
+
+{% block content %}
+<div class="coming-soon">
+    Coming soon...
+</div>
+{% endblock %}
