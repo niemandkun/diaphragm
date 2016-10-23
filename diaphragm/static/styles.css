@@ -172,11 +172,11 @@ body {
 }
 
 .avatar img {
-    flex: 2 0 auto;
-    /*-webkit-box-flex: 2;
-    -moz-box-flex: 2;
-    -webkit-flex: 2 0 auto;
-    -ms-flex: 2 0 auto;*/
+    flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    -moz-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
     width: 15em;
     border-radius: 50%;
 }
