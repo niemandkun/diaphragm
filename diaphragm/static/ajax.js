@@ -5,13 +5,15 @@ window.onload = function() {
 }
 
 window.onpopstate = function(e) {
-    ref(document.location.pathname, history=false);
+    request("/api" + document.location.pathname, function(response) {
+        updateContent(response.title, response.content);
+    });
 }
 
-function ref(url, history=true) {
+function ref(url) {
     request("/api" + url, function(response) {
         updateContent(response.title, response.content);
-        if (history) pushHistoty(response.title, url);
+        pushHistoty(response.title, url);
     });
 }
 

@@ -23,9 +23,9 @@ function switchElement(cls, firstState, secondState) {
 }
 
 function applyToAll(selector, func) {
-    let elements = document.getElementsByClassName(selector);
-    for (let element of elements)
-        func(element);
+    var elements = document.getElementsByClassName(selector);
+    for (var i = 0; i < elements.length; ++i)
+        func(elements[i]);
 }
 
 function exchangeSubstring(str, substrA, substrB) {
