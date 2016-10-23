@@ -27,6 +27,10 @@ function request(url, callback) {
 function handleResponse(callback) {
     return function() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 0) {
+                return;
+            }
+
             if (httpRequest.status === 200) {
                 response = JSON.parse(httpRequest.responseText);
             } else {
