@@ -24,17 +24,14 @@ body {
     margin: auto;
     display: flex;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     min-height: 100%;
     flex-direction: column;
     -ms-flex-direction: column;
-    -moz-flex-direction: column;
     -webkit-flex-direction: column;
     flex-flow: column wrap;
     -ms-flex-flow: column wrap;
-    -moz-flex-flow: column wrap;
     -webkit-flex-flow: column wrap;
     background-color: #f5f5f5;
 }
@@ -63,18 +60,15 @@ body {
     height: auto;
     display: flex;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     position: fixed;
     align-items: center;
     flex-direction: column;
     -ms-flex-direction: column;
-    -moz-flex-direction: column;
     -webkit-flex-direction: column;
     flex-flow: column nowrap;
     -ms-flex-flow: column nowrap;
-    -moz-flex-flow: column nowrap;
     -webkit-flex-flow: column nowrap;
     justify-content: center;
 }
@@ -104,19 +98,16 @@ body {
 .wrapper {
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     width: 100%;
     display: flex;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     z-index: 9000;
     flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
-    -moz-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
 }
 
@@ -124,7 +115,6 @@ body {
     padding: 0 1em;
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     height: 3em;
@@ -158,11 +148,9 @@ body {
     display: none;
     flex-direction: column;
     -ms-flex-direction: column;
-    -moz-flex-direction: column;
     -webkit-flex-direction: column;
     flex-flow: column nowrap;
     -ms-flex-flow: column nowrap;
-    -moz-flex-flow: column nowrap;
     -webkit-flex-flow: column nowrap;
     align-items: center;
 }
@@ -170,7 +158,6 @@ body {
 .avatar img {
     flex: 0 0 auto;
     -webkit-box-flex: 0;
-    -moz-box-flex: 0;
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     width: 15em;
@@ -188,26 +175,21 @@ body {
 .content {
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     display: flex;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     margin-top: 3.2em;
     flex-wrap: wrap;
     -ms-flex-wrap: wrap;
-    -moz-flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
     flex-direction: row;
     -ms-flex-direction: row;
-    -moz-flex-direction: row;
     -webkit-flex-direction: row;
     flex-flow: row wrap;
     -ms-flex-flow: row wrap;
-    -moz-flex-flow: row wrap;
     -webkit-flex-flow: row wrap;
     align-content: flex-start;
     justify-content: center;
@@ -216,7 +198,6 @@ body {
 .content > div {
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     padding: 1em;
@@ -250,7 +231,6 @@ body {
 .spinner {
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     background-color: transparent;
@@ -258,19 +238,15 @@ body {
     align-items: center;
     flex-direction: column;
     -ms-flex-direction: column;
-    -moz-flex-direction: column;
     -webkit-flex-direction: column;
     flex-flow: column wrap;
     -ms-flex-flow: column wrap;
-    -moz-flex-flow: column wrap;
     -webkit-flex-flow: column wrap;
-
 }
 
 .expand {
     flex: 1 1 auto;
     -webkit-box-flex: 1;
-    -moz-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
 }
@@ -279,11 +255,9 @@ body {
     .header {
         flex-direction: row;
         -ms-flex-direction: row;
-        -moz-flex-direction: row;
         -webkit-flex-direction: row;
         flex-flow: row wrap;
         -ms-flex-flow: row wrap;
-        -moz-flex-flow: row wrap;
         -webkit-flex-flow: row wrap;
         height: 3em;
     }
@@ -347,7 +321,6 @@ body {
     .content > .avatar {
         display: flex;
         display: -webkit-box;
-        display: -moz-box;
         display: -ms-flexbox;
         display: -webkit-flex;
     }
