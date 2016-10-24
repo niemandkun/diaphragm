@@ -2,7 +2,7 @@ from distutils.core import setup
 
 
 setup(name='diaphragm',
-      version='0.0-dev1',
+      version='0.0-dev2',
       description="A web application brave enough to serve niemandkun's place.",
       author='niemandkun',
       author_email='niemandkun@yandex.ru',
@@ -10,10 +10,14 @@ setup(name='diaphragm',
       packages=['diaphragm'],
       scripts=['bin/diaphragm.wsgi'],
 
+      package_dir={
+        'diaphragm': 'diaphragm',
+      },
+
       package_data={
         'diaphragm': [
-            'diaphragm/static/',
-            'diaphragm/templates/',
+            'static/*',
+            'templates/*',
         ]
       },
 

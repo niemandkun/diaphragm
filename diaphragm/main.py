@@ -7,7 +7,7 @@ from flask import render_template
 
 
 app = Flask(__name__, static_folder="static")
-app.config.from_object('config.ProductionConfig')
+app.config.from_object('diaphragm.config.ProductionConfig')
 
 
 def render_ajax(*args, **kwargs):
@@ -40,7 +40,3 @@ def blog():
 @app.route("/api/projects")
 def projects():
     return render_ajax("coming_soon.html")
-
-
-if __name__ == "__main__":
-    app.run("0.0.0.0", 8080)
