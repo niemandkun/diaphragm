@@ -218,6 +218,7 @@ body {
     color: grey;
 }
 
+.spinner,
 .content div.error,
 .content div.welcome,
 .content div.coming-soon {
@@ -233,8 +234,8 @@ body {
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
-    background-color: transparent;
     display: none;
+    margin: 0;
     align-items: center;
     flex-direction: column;
     -ms-flex-direction: column;
