@@ -8,6 +8,15 @@ function hideNavigation() {
     setElement("cover", "visible", "hidden");
 }
 
+function getByClassName(selector) {
+    if (document.getElementsByClassName)
+        return document.getElementsByClassName(selector);
+    else if (document.querySelectorAll)
+        return document.querySelectorAll("." + selector);
+    else
+        return null;
+}
+
 function setElement(cls, oldState, newState) {
     applyToAll(cls, function(elem) {
         elem.className = elem.className.replace(oldState,
@@ -23,15 +32,15 @@ function switchElement(cls, firstState, secondState) {
 }
 
 function applyToAll(selector, func) {
-    var elements = document.getElementsByClassName(selector);
+    var elements = getByClassName(selector);
     for (var i = 0; i < elements.length; ++i)
         func(elements[i]);
 }
 
 function exchangeSubstring(str, substrA, substrB) {
-    if (str.includes(substrA))
+    if (str.indexOf(substrA) >= 0)
         return str.replace(substrA, substrB);
-    else if (str.includes(substrB))
+    else if (str.indexOf(substrB) >= 0)
         return str.replace(substrB, substrA);
     return str;
 }

@@ -28,7 +28,10 @@ function request(url, callback) {
 
 function handleResponse(callback) {
     return function() {
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+        var done = 4;
+
+        if (httpRequest.readyState === done) {
             if (httpRequest.status === 0) {
                 return;
             }
@@ -57,11 +60,12 @@ function createError(errorNumber) {
 }
 
 function pushHistoty(title, url) {
-    history.pushState(null, title, url);
+    if (history.pushState)
+        history.pushState(null, title, url);
 }
 
 function updateContent(title, contentText) {
-    content = document.getElementsByClassName("content")[0];
+    content = getByClassName("content")[0];
     content.innerHTML = contentText;
     document.title = title;
 }
