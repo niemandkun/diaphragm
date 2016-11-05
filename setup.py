@@ -2,7 +2,7 @@ from distutils.core import setup
 
 
 setup(name='diaphragm',
-      version='0.0-dev6',
+      version='0.0-dev7',
       description="A web application brave enough to serve niemandkun's place.",
       author='niemandkun',
       author_email='niemandkun@yandex.ru',
