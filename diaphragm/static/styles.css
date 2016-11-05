@@ -158,6 +158,7 @@ body {
     -ms-flex-flow: column nowrap;
     -webkit-flex-flow: column nowrap;
     align-items: center;
+    padding: 2em 0;
 }
 
 .avatar img {
@@ -206,11 +207,18 @@ body {
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     padding: 1em;
-    width: 100%;
     border-radius: 2px;
     margin: 0.3em 0em;
     background-color: white;
     border-bottom: 2px solid lightgrey;
+}
+
+.onecolumn {
+    width: 100%;
+}
+
+.twocolumns {
+    width: 100%;
 }
 
 .footer {
@@ -294,11 +302,7 @@ body {
     }
 }
 
-@media screen and (min-width: 800px) {
-    html {
-        font-size: 1.2em;
-    }
-
+@media screen and (min-width: 480px) {
     .container {
         width: 100%;
         background-color: white;
@@ -310,9 +314,12 @@ body {
         background-color: transparent;
     }
 
+    .title {
+        margin-left: 0.5em;
+    }
+
     .navigation a {
         text-decoration: underline;
-        padding: 0 0 0 1em;
     }
 
     .navigation a:hover {
@@ -327,8 +334,7 @@ body {
         border: none;
         background-color: white;
         padding: 0;
-        margin: 1em;
-        width: 40%;
+        margin: 0 1em;
     }
 
     .content > .avatar {
@@ -343,17 +349,21 @@ body {
     }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 800px) {
     .container {
-        width: 900px;
+        width: 800px;
+    }
+
+    .onecolumn {
+        width: 100%;
+    }
+
+    .twocolumns {
+        width: 40%;
     }
 
     .content {
         padding: 0;
-    }
-
-    .header {
-        margin-top: 2em;
     }
 
     .title, .navigation {
