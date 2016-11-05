@@ -37,4 +37,4 @@ def blog():
 
 @app.route("/api/projects")
 def projects():
-    return render_ajax("coming_soon.html")
+    return render_ajax("projects.html")
