@@ -1,0 +1,88 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+
+<div class="onecolumn">
+    <h1>Projects</h1>
+    <p>Here you can read about the projects that I'm building or contributing in.</p>
+    <p>Most of these projects are just my attempts at writing.</p>
+    <p>With an asterisk (*) I've marked the projects that are used by somebody (the `adult` projects).
+    <br>With a plus (+) character I've marked the other people's projects
+    where I'm taking part in.</p>
+</div>
+
+<div class="onecolumn">
+    <h2>Educational</h2>
+    <ul>
+        <li>
+            <a href="https://github.com/niemandkun/plotextract">plotextract</a>
+            - a tool to extract plots from raster images *
+        </li>
+
+        <li>
+            <a href="https://github.com/niemandkun/pyext">pyext</a>
+            - a tool to open ext4 disk image and restore deleted files
+        </li>
+
+        <li>
+            <a href="https://github.com/niemandkun/cmapping">cmapping</a>
+            - a tool to define C-like structures in Python and parse binary data
+        </li>
+
+        <li>
+            <a href="https://github.com/niemandkun/code-workbench">code-workbench</a>
+            - an IPython-like console for C#
+        </li>
+    </ul>
+</div>
+
+<div class="onecolumn">
+    <h2>Gamedev</h2>
+    <ul>
+        <li>
+            <a href="https://github.com/air-labs/uCvarc">uCvarc</a>
+            - a platform for creating online competitions of video game AI *+
+        </li>
+
+        <li>
+            <a href="https://github.com/niemandkun/optical-flow">optical-flow</a>
+            - a game that uses webcam as a controller
+        </li>
+        <li>
+            <a href="https://github.com/niemandkun/mirai-engine">mirai-engine</a>
+            - 2D game engine on SFML
+        </li>
+    </ul>
+</div>
+
+<div class="twocolumns">
+    <h2>Other</h2>
+    <ul>
+        <li>
+            <a href="https://github.com/niemandkun/assembly">assembly</a>
+            - just some assembly code
+        </li>
+        <li>
+            <a href="https://github.com/niemandkun/config">config</a>
+            - some of my config files
+        </li>
+    </ul>
+</div>
+
+<div class="twocolumns">
+    <h2>Web</h2>
+    <ul>
+        <li>
+            <a href="https://github.com/niemandkun/diaphragm">diaphragm</a>
+            - this website *
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
