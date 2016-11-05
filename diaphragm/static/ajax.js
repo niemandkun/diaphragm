@@ -12,7 +12,7 @@ window.onpopstate = function(e) {
 
 window.onclick = function(ev) {
 
-    if (ev.target.tagName == "A") {
+    if (ev.target.tagName == "A" && ev.button == 0) {
         if (ev.target.host == document.location.host) {
             stop(ev);
             ref(ev.target.pathname);
