@@ -10,6 +10,29 @@ window.onpopstate = function(e) {
     });
 }
 
+window.onclick = function(ev) {
+
+    if (ev.target.tagName == "A") {
+        if (ev.target.host == document.location.host) {
+            stop(ev);
+            ref(ev.target.pathname);
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function stop(event) {
+    if (event.preventDefault)
+        event.preventDefault();
+    if (event.stopPropagation)
+        event.stopPropagation();
+
+    event.returnValue = false;
+    return event;
+}
+
 function ref(url) {
     request("/api" + url, function(response) {
         updateContent(response.title, response.content);
