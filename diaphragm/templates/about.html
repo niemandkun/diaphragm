@@ -4,31 +4,32 @@
     {% extends "ajax.json" %}
 {% endif %}
 
-{% block title %}About me | nl{% endblock %}
+{% block title %}About me{% endblock %}
 
 {% block content %}
-<div class="avatar twocolumns">
-    <div class="expand"></div>
-    <img src="static/avatar.jpg" alt="me">
-    <div class="expand"></div>
-</div>
-
 <div class="twocolumns">
     <h1>About me</h1>
 
     <p>
         Hi, everyone! My name is <i>Ivan Poroshin</i> and I'm third year computer science bachelor
-        student and enthusiastic programmer, interested in robotics,
+        student and enthusiastic programmer, interested in gamedev, robotics,
         computer vision, bioinformatics and more.
     </p>
 
     <p>Also, you can find me by my nickname <i>niemandkun</i>.</p>
 </div>
 
+<div class="avatar twocolumns">
+    <div class="expand"></div>
+    <img src="static/avatar.jpg" alt="me">
+    <div class="expand"></div>
+</div>
+
 <div class="onecolumn">
     <p>
-        My current location is Yekaterinburg. Here I'm studying math and
-        CS as a student of <a href="http://imkn.urfu.ru">The Institute of
+        My current location is Yekaterinburg, where I'm studying math and
+        computer science as a student of
+        <a href="http://imkn.urfu.ru">The Institute of
         Mathematics and Computer Sciences</a> of
         <a href="http://urfu.ru/en/">The Ural Federal University</a>.
     </p>
@@ -106,7 +107,7 @@
         page.
     </p>
     <p>
-        Besides this I like to play games and have a
+        I like to play games and have a
         <a href="https://steamcommunity.com/profiles/76561198058887699">Steam</a>
         profile. So, if you'd like to play together, just let me know.
     </p>
@@ -122,7 +123,8 @@
         This website is extremely lightweight.
         It was built from scratch with no JS and CSS frameworks.
         Server is located at my home on a
-        <a href="https://www.raspberrypi.org/">Raspberry Pi</a>.
+        <a href="https://www.raspberrypi.org/">Raspberry Pi</a>
+        microcomputer.
     </p>
     <p>
         <a href="http://flask.pocoo.org/">Flask</a> is used to generate and send
