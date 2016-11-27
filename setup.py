@@ -2,7 +2,7 @@ from distutils.core import setup
 
 
 setup(name='diaphragm',
-      version='0.0-dev9',
+      version='0.0-dev11',
       description="A web application brave enough to serve niemandkun's place.",
       author='niemandkun',
       author_email='niemandkun@yandex.ru',
@@ -16,7 +16,11 @@ setup(name='diaphragm',
 
       package_data={
         'diaphragm': [
-            'static/*',
+            'static/*.js',
+            'static/*.jpg',
+            'static/*.ico',
+            'static/*.svg',
+            'static/*.css',
             'static/gallery/*',
             'templates/*',
         ]
