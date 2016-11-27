@@ -10,13 +10,6 @@ document.addEventListener('dynload', function(event) {
         var image = thumbnails[i].getElementsByTagName("IMG")[0];
         images.push(image.src);
     }
-
-    if (window.location.hash) {
-        var imageFull = getByClassName("image-full")[0];
-        imageFull.src = "static/gallery/" + location.hash.substr(1);
-        setElement("show", "hidden", "visible");
-    }
-
 }, false);
 
 function currentImage() {
@@ -50,8 +43,15 @@ window.onhelp = function(ev) {
     return false;
 }
 
-window.onkeypress = function(event) {
+window.addEventListener("keydown", function(event) {
     var imageFull = getByClassName("image-full")[0];
+
+    var showVisible = getByClassName("show-visible").length > 0;
+
+    stop(event);
+
+    if (!showVisible)
+        return false;
 
     if (event.key === "Escape" || event.key === "Esc") {
         setElement("show", "visible", "hidden");
@@ -77,4 +77,6 @@ window.onkeypress = function(event) {
     if (event.key === "F1") {
         switchElement("help", "hidden", "visible");
     }
-}
+
+    return false;
+});
