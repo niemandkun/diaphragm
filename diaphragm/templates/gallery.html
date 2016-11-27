@@ -12,26 +12,40 @@
     <p>
         The most exciting moments of my life.
         <br/>
-        (Actually, not. Just brought here some Cayley tables of some randomly generated groups.)
+        (Actually, not. Just brought here some Cayley tables of randomly generated groups.)
     </p>
 </div>
 
 {% for picture in pictures %}
-<div class="threecolumns">
-    <a class="picture" onclick="showImage(event);">
+<div class="fourcolumns">
         <div class="thumbnail">
-            <img src="{{ picture }}"></img>
+            <img src="{{ url_for('static', filename=picture) }}"
+                 onclick="showImage(event);"></img>
         </div>
-    </a>
 </div>
 {% endfor %}
 
-<div class="show show-hidden" onclick="hideImage(event)">
-    <div class="expand"></div>
-    <div class="show-image-wrapper">
-        <img class="show-image"></img>
+{% if full_size %}
+<div class="show show-visible" onclick="hideImage(event);">
+{% else %}
+<div class="show show-hidden" onclick="hideImage(event);">
+{% endif %}
+    <div class="popup">
+        <div class="help help-hidden">
+            <h4>Help</h4>
+            <ul>
+                <li><b>F1</b> - help</li>
+                <li><b>Left arrow</b> - previous</li>
+                <li><b>Right arrow</b> - next</li>
+                <li><b>Escape</b> - close gallery</li>
+            </ul>
+        </div>
+        {% if full_size %}
+        <img class="image-full" src={{ url_for('static', filename=full_size) }}></img>
+        {% else %}
+        <img class="image-full"></img>
+        {% endif %}
     </div>
-    <div class="expand"></div>
 </div>
 
 {% endblock %}

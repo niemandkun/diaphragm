@@ -21,31 +21,20 @@ body {
     height: 100%;
 }
 
-.show-image-wrapper {
-    background-image: url("gears.svg");
-    height: 10em;
-    background-repeat: no-repeat;
-    background-origin: border-box;
-    background-position: center;
+.help-hidden {
+    top: -20em;
+}
+
+.help-visible {
+    top: 0;
+}
+
+.content > div.show-visible {
+    display: block;
 }
 
 .content > div.show-hidden {
     display: none;
-}
-
-.content > div.show-visible {
-    z-index: 300;
-    display: flex;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    flex-direction: column;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-flow: column nowrap;
-    -ms-flex-flow: column nowrap;
-    -webkit-flex-flow: column nowrap;
-    flex-wrap: nowrap;
 }
 
 .content > div.show {
@@ -54,9 +43,34 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(100, 100, 100, 0.8);
-    margin: 0px;
+    margin: 0;
+    padding: 0;
     text-align: center;
+    z-index: 1000;
+    background-color: rgba(100, 100, 100, 0.6);
+}
+
+.image-full {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top: 5em;
+}
+
+.help {
+    position: fixed;
+    left: 0;
+    padding: 1em;
+    margin: 2em;
+    border-radius: 4px;
+    text-align: left;
+    background-color: white;
+    transition-duration: 200ms;
+}
+
+.help > ul {
+    list-style: none;
+    padding: 0;
 }
 
 .container {
@@ -216,7 +230,10 @@ body {
 }
 
 .thumbnail img {
-    width: inherit;
+    cursor: pointer;
+    width: 100%;
+    height: 10em;
+    object-fit: contain;
 }
 
 .menu,
@@ -350,11 +367,32 @@ body {
     }
 
     .thumbnail {
-        width: 12em;
+        width: 8em;
         padding: 1em;
+        padding-bottom: 1.5em;
         margin-top: 1em;
-        box-shadow: 2px 2px 10px lightgrey;
         border: 1px solid lightgrey;
+        border-radius: 4px;
+    }
+
+    .image-full {
+        margin: 0;
+        width: 100%;
+        object-fit: scale-down;
+        height: 20em;
+    }
+
+    .popup {
+        background-image: url("gears.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 3em;
+        background-color: white;
+        margin: auto;
+        width: 50%;
+        min-height: 5em;
+        margin-top: 1em;
+        border-radius: 4px;
     }
 }
 
@@ -409,7 +447,7 @@ body {
     }
 
     .fourcolumns {
-        width: 40%;
+        width: 25%;
     }
 }
 

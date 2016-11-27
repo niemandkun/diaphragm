@@ -1,4 +1,4 @@
-httpRequest = new XMLHttpRequest();
+var httpRequest = new XMLHttpRequest();
 
 window.onload = function() {
     ref(document.location.pathname);
@@ -10,12 +10,26 @@ window.onpopstate = function(e) {
     });
 }
 
+function findParent(tagname,el){
+  if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
+    return el;
+  }
+  while (el = el.parentNode){
+    if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
+      return el;
+    }
+  }
+  return null;
+}
+
 window.onclick = function(ev) {
 
-    if (ev.target.tagName == "A" && ev.button == 0) {
-        if (ev.target.host == document.location.host) {
+    var target = findParent('a', ev.target || ev.srcElement)
+
+    if (target && ev.button == 0) {
+        if (target.host == document.location.host) {
             stop(ev);
-            ref(ev.target.pathname);
+            ref(target.pathname);
             return false;
         }
     }
@@ -36,7 +50,7 @@ function stop(event) {
 function ref(url) {
     request("/api" + url, function(response) {
         updateContent(response.title, response.content);
-        pushHistoty(response.title, url);
+        pushHistory(response.title, url);
     });
 }
 
@@ -67,6 +81,7 @@ function handleResponse(callback) {
 
             callback(response);
             hideSpinner();
+            document.dispatchEvent(new Event('dynload'));
         }
     }
 }
@@ -82,7 +97,7 @@ function createError(errorNumber) {
     return error;
 }
 
-function pushHistoty(title, url) {
+function pushHistory(title, url) {
     if (history.pushState)
         history.pushState(null, title, url);
 }
