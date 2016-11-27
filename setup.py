@@ -17,6 +17,7 @@ setup(name='diaphragm',
       package_data={
         'diaphragm': [
             'static/*',
+            'static/gallery/*',
             'templates/*',
         ]
       },
