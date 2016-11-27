@@ -6,7 +6,7 @@ from flask import render_template, url_for, abort
 
 
 app = Flask(__name__, static_folder="static")
-app.config.from_object('diaphragm.config.DebugConfig')
+app.config.from_object('diaphragm.config.ProductionConfig')
 
 
 def render_ajax(*args, **kwargs):
