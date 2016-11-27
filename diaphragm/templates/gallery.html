@@ -1,0 +1,37 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}Gallery{% endblock %}
+
+{% block content %}
+<div class="onecolumn">
+    <h1>Gallery</h1>
+    <p>
+        The most exciting moments of my life.
+        <br/>
+        (Actually, not. Just brought here some Cayley tables of some randomly generated groups.)
+    </p>
+</div>
+
+{% for picture in pictures %}
+<div class="threecolumns">
+    <a class="picture" onclick="showImage(event);">
+        <div class="thumbnail">
+            <img src="{{ picture }}"></img>
+        </div>
+    </a>
+</div>
+{% endfor %}
+
+<div class="show show-hidden" onclick="hideImage(event)">
+    <div class="expand"></div>
+    <div class="show-image-wrapper">
+        <img class="show-image"></img>
+    </div>
+    <div class="expand"></div>
+</div>
+
+{% endblock %}

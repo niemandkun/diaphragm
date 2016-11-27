@@ -15,6 +15,21 @@ a:hover {
     cursor: pointer;
 }
 
+.thumbnail img {
+    width: inherit;
+}
+
+.thumbnail {
+    text-align: center;
+    margin: auto;
+    width: inherit;
+    width: 12em;
+    padding: 1em;
+    margin-top: 1em;
+    box-shadow: 2px 2px 10px lightgrey;
+    border: 1px solid lightgrey;
+}
+
 .menu {
     display: none;
 }
@@ -40,7 +55,6 @@ a:hover {
 .container {
     width: 70%;
     margin: auto;
-    margin-top: 3em;
 }
 
 .content {

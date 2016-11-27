@@ -1,11 +1,12 @@
+import os
 import json
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 
 
 app = Flask(__name__, static_folder="static")
-app.config.from_object('diaphragm.config.ProductionConfig')
+app.config.from_object('diaphragm.config.DebugConfig')
 
 
 def render_ajax(*args, **kwargs):
@@ -28,6 +29,14 @@ def welcome():
 @app.route("/api/about")
 def about():
     return render_ajax("about.html")
+
+
+@app.route("/api/gallery")
+def gallery():
+    pictures = os.listdir(os.path.join(app.static_folder, 'gallery'))
+    pictures = [url_for('static', filename=os.path.join('gallery', x))
+                for x in pictures]
+    return render_ajax("gallery.html", pictures=pictures)
 
 
 @app.route("/api/blog")
