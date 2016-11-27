@@ -44,21 +44,27 @@ function hideImage(event) {
     setElement("show", "visible", "hidden");
 }
 
+window.onhelp = function(ev) {
+    switchElement("help", "hidden", "visible");
+    stop(ev);
+    return false;
+}
+
 window.onkeypress = function(event) {
     var imageFull = getByClassName("image-full")[0];
 
-    if (event.key === "Escape") {
+    if (event.key === "Escape" || event.key === "Esc") {
         setElement("show", "visible", "hidden");
         pushHistory(document.title, "/gallery");
     }
 
-    if (event.key === "ArrowRight") {
+    if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
         imageFull.src = images[(currentImage() + 1) % images.length];
         var path = imageFull.src.replace("/static", "");
         pushHistory(document.title, path);
     }
 
-    if (event.key === "ArrowLeft") {
+    if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
         var nextImage = currentImage() - 1;
         if (nextImage === -1)
             nextImage += images.length;

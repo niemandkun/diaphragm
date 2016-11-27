@@ -81,7 +81,10 @@ function handleResponse(callback) {
 
             callback(response);
             hideSpinner();
-            document.dispatchEvent(new Event('dynload'));
+
+            var evt = document.createEvent('CustomEvent');
+            evt.initEvent("dynload", true, true);
+            document.dispatchEvent(evt);
         }
     }
 }
