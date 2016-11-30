@@ -4,9 +4,15 @@ import json
 from flask import Flask
 from flask import render_template, url_for, abort
 
+from diaphragm.gallery import Gallery, create_thumbnails
+
 
 app = Flask(__name__, static_folder="static")
 app.config.from_object('diaphragm.config.ProductionConfig')
+
+gallery = Gallery(app.static_folder, app.config["GALLERY"])
+thumbnails = create_thumbnails(gallery.list_static(),
+                               app.static_folder, app.config["THUMBNAILS"])
 
 
 def render_ajax(*args, **kwargs):
@@ -34,21 +40,19 @@ def about():
 
 @app.route("/api/gallery")
 def gallery():
-    pictures = os.listdir(os.path.join(app.static_folder, 'gallery'))
-    pictures = [os.path.join('gallery', x) for x in pictures]
+    pictures = gallery.list()
     return render_ajax("gallery.html", full_size=None, pictures=pictures)
 
 
 @app.route("/api/gallery/<filename>")
 def get_image(filename):
-    full_size = os.path.join('gallery', filename)
-    if not os.path.isfile(os.path.join(app.static_folder, full_size)):
+    file_send = gallery.get(filename)
+
+    if not file_send:
         abort(404)
 
-    pictures = os.listdir(os.path.join(app.static_folder, 'gallery'))
-    pictures = [os.path.join('gallery', x) for x in pictures]
-
-    return render_ajax("gallery.html", full_size=full_size, pictures=pictures)
+    pictures = gallery.list()
+    return render_ajax("gallery.html", full_size=file_send, pictures=pictures)
 
 
 @app.route("/api/blog")

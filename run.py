@@ -3,4 +3,4 @@
 from diaphragm import application
 
 
-application.run('0.0.0.0', 8080)
+application.run('127.0.0.1', 8080)
