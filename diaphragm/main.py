@@ -39,8 +39,8 @@ def about():
 
 
 @app.route("/api/gallery")
-def gallery():
-    pictures = gallery.list()
+def show_gallery():
+    pictures = thumbnails.list()
     return render_ajax("gallery.html", full_size=None, pictures=pictures)
 
 
@@ -51,7 +51,7 @@ def get_image(filename):
     if not file_send:
         abort(404)
 
-    pictures = gallery.list()
+    pictures = thumbnails.list()
     return render_ajax("gallery.html", full_size=file_send, pictures=pictures)
 
 

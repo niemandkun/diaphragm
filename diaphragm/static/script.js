@@ -175,6 +175,14 @@ function exchangeSubstring(str, substrA, substrB) {
 }
 
 var images = [];
+var preload = null;
+
+function updatePreload() {
+   var current = currentImage();
+   var nextImage = (current + 1) % images.length;
+   preload = new Image();
+   preload.src = images[nextImage];
+}
 
 document.addEventListener('dynload', function(event) {
     if (images.length > 0) return;
@@ -183,7 +191,7 @@ document.addEventListener('dynload', function(event) {
 
     for (var i = 0; i < thumbnails.length; ++i) {
         var image = thumbnails[i].getElementsByTagName("IMG")[0];
-        images.push(image.src);
+        images.push(image.src.replace("thumbnails", "gallery"));
     }
 }, false);
 
@@ -192,13 +200,34 @@ function currentImage() {
     return images.indexOf(imageFull.src);
 }
 
+function removeImageFull() {
+    var imageFull = getByClassName("image-full");
+    var popup = getByClassName("popup")[0];
+
+    for (var i = 0; i < imageFull.length; ++i) {
+        popup.removeChild(imageFull[i]);
+    }
+}
+
+function resetImageFull() {
+    removeImageFull();
+
+    var popup = getByClassName("popup")[0];
+    var imageFull = document.createElement("IMG");
+    imageFull.className = "image-full";
+    popup.appendChild(imageFull);
+
+    return imageFull;
+}
 
 function showImage(event) {
-    var imageFull = getByClassName("image-full")[0];
-    imageFull.src = event.target.src;
+    var imageFull = resetImageFull();
+    imageFull.src = "";
+    imageFull.src = event.target.src.replace("thumbnails", "gallery");
     var path = imageFull.src.replace("/static", "");
     pushHistory(document.title, path);
     setElement("show", "hidden", "visible");
+    updatePreload();
 }
 
 function hideImage(event) {
@@ -207,8 +236,8 @@ function hideImage(event) {
         stop(event);
         return false;
     }
+    removeImageFull();
     pushHistory(document.title, "/gallery");
-
     setElement("show", "visible", "hidden");
 }
 
@@ -219,8 +248,6 @@ window.onhelp = function(ev) {
 }
 
 window.addEventListener("keydown", function(event) {
-    var imageFull = getByClassName("image-full")[0];
-
     var showVisible = getByClassName("show-visible").length > 0;
 
     if (!showVisible)
@@ -234,18 +261,23 @@ window.addEventListener("keydown", function(event) {
     }
 
     if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
-        imageFull.src = images[(currentImage() + 1) % images.length];
+        var nextImage = (currentImage() + 1) % images.length;
+        var imageFull = resetImageFull();
+        imageFull.src = images[nextImage];
         var path = imageFull.src.replace("/static", "");
         pushHistory(document.title, path);
+        updatePreload();
         stop(event);
         return false;
     }
 
     if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
         var nextImage = currentImage() - 1;
+
         if (nextImage === -1)
             nextImage += images.length;
 
+        var imageFull = resetImageFull();
         imageFull.src = images[nextImage];
         var path = imageFull.src.replace("/static", "");
         pushHistory(document.title, path);

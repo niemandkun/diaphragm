@@ -39,7 +39,8 @@ class Gallery:
 
     def get(self, filename):
         full_path = os.path.join(self.abspath, filename)
-        return full_path if self.__is_exist(full_path) else None
+        return os.path.join(self.folder, filename)\
+            if self.__is_exist(full_path) else None
 
     def __is_exist(self, filepath):
         return os.path.isfile(filepath)
