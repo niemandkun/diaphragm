@@ -5,27 +5,31 @@ window.onload = function() {
 }
 
 window.onpopstate = function(e) {
-    request("/api" + document.location.pathname, function(response) {
-        updateContent(response.title, response.content);
-    });
+    ref(document.location.pathname, true);
+}
+
+function raiseReload() {
+    var evt = document.createEvent('CustomEvent');
+    evt.initEvent("ajax_reload", true, true);
+    document.dispatchEvent(evt);
 }
 
 function findParent(tagname,el){
-  if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
-    return el;
-  }
-  while (el = el.parentNode){
-    if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
-      return el;
+    tagname = tagname.toLowerCase()
+
+    if ((el.nodeName || el.tagName).toLowerCase() === tagname) {
+        return el;
     }
-  }
-  return null;
+    while (el = el.parentNode){
+        if ((el.nodeName || el.tagName).toLowerCase() === tagname) {
+            return el;
+        }
+    }
+    return null;
 }
 
 window.onclick = function(ev) {
-
     var target = findParent('a', ev.target || ev.srcElement)
-
     if (target && ev.button == 0) {
         if (target.host == document.location.host) {
             stop(ev);
@@ -33,7 +37,6 @@ window.onclick = function(ev) {
             return false;
         }
     }
-
     return true;
 }
 
@@ -47,20 +50,39 @@ function stop(event) {
     return event;
 }
 
-function ref(url) {
-    request("/api" + url, function(response) {
+function ref(url, notPushHistory) {
+    hideNavigation();
+    showSpinner();
+
+    get("/api" + url, function(response) {
+
+        if (!notPushHistory)
+            pushHistory(response.title, url);
+
+        hideSpinner();
         updateContent(response.title, response.content);
-        pushHistory(response.title, url);
+        raiseReload();
     });
 }
 
-function request(url, callback) {
-    hideNavigation();
-    showSpinner();
+function get(url, callback) {
+    request("GET", url, null, callback);
+}
+
+function post(url, data, callback) {
+    request("POST", url, data, callback);
+}
+
+function request(method, url, data, callback) {
     httpRequest.abort();
     httpRequest.onreadystatechange = handleResponse(callback);
-    httpRequest.open('GET', url);
-    httpRequest.send();
+    httpRequest.open(method, url, true);
+
+    if (data) {
+        httpRequest.send(data);
+    } else {
+        httpRequest.send();
+    }
 }
 
 function handleResponse(callback) {
@@ -80,11 +102,6 @@ function handleResponse(callback) {
             }
 
             callback(response);
-            hideSpinner();
-
-            var evt = document.createEvent('CustomEvent');
-            evt.initEvent("dynload", true, true);
-            document.dispatchEvent(evt);
         }
     }
 }
@@ -146,6 +163,15 @@ function getByClassName(selector) {
         return null;
 }
 
+function getById(selector) {
+    if (document.getElementById)
+        return document.getElementById(selector);
+    else if (document.querySelectorAll)
+        return document.querySelectorAll("#" + selector)[0];
+    else
+        return null;
+}
+
 function setElement(cls, oldState, newState) {
     applyToAll(cls, function(elem) {
         elem.className = elem.className.replace(oldState,
@@ -184,7 +210,7 @@ function updatePreload() {
    preload.src = images[nextImage];
 }
 
-document.addEventListener('dynload', function(event) {
+document.addEventListener('ajax_reload', function(event) {
     if (images.length > 0) return;
 
     var thumbnails = getByClassName("thumbnail");
@@ -291,3 +317,27 @@ window.addEventListener("keydown", function(event) {
         return false;
     }
 });
+
+function startThread(event) {
+    var data = new FormData(getById("postform"));
+
+    post("/api/start_thread", data, function(r) {
+        if (r.thread_id)
+            ref("/board/thread/" + r.thread_id);
+    });
+
+    stop(event);
+    return false;
+}
+
+function postMessage(event) {
+    var data = new FormData(getById("postform"));
+    var thread = getById("thread").value;
+
+    post("/api/post_message", data, function(r) {
+        ref("/board/thread/"+ thread);
+    });
+
+    stop(event);
+    return false;
+}

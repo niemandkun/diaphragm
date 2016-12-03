@@ -1,0 +1,64 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}/nl/{% endblock %}
+
+{% block content %}
+
+{% for thread, op, last_n in threads %}
+<div class="onecolumn thread">
+    <div class="post-header">
+        <p class="thread-reply">[<a href="board/thread/{{ thread.id }}">Reply</a>]</p>
+        <p class="post-id">No.{{ thread.id }}</p>
+        <p class="thread-subject">{{ thread.subject }}</p>
+        <p class="post-author">{{ op.author }}</p>
+        <p class="post-time">{{ op.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
+    </div>
+    {% if op.attachment %}
+    <img class="post-attachment"
+         src="{{ url_for('static', filename=thumbnails + '/' + op.attachment) }}"
+         alt="op.attachment"
+         onclick="showImage(event);">
+    {% endif %}
+    <div class="post-content">{{ op.message }}</div>
+
+    {% for post in posts %}
+    <div class="onecolumn post">
+        <div class="post-header">
+            <p class="post-author">{{ post.author }}</p>
+            <p class="post-id">No.{{ post.id }}</p>
+            <p class="post-time">{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
+        </div>
+        {% if op.attachment %}
+        <img class="post-attachment"
+             src="{{ url_for('static', filename=thumbnails + '/' + op.attachment) }}"
+             alt="op.attachment"
+             onclick="showImage(event);">
+        {% endif %}
+        <div class="post-content">{{ post.message }}</div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endfor %}
+
+<div class="onecolumn">
+    <form id="postform" class="postform" method="POST">
+        <h3>Start a new thread</h3>
+        {{ form.csrf_token }}
+
+        <p>{{ form.subject }}</p>
+        <p>{{ form.author }}</p>
+        <p>{{ form.message }}</p>
+        <p>{{ form.fileupload }}</p>
+
+        <input class="submit" type="submit"
+            value="Start" onclick="startThread(event);">
+    </form>
+</div>
+
+{% endblock %}

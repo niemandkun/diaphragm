@@ -330,6 +330,88 @@ body {
     -ms-flex: 1 1 auto;
 }
 
+.post-content {
+    clear: both;
+}
+
+.post-id {
+    color: grey;
+    float: right;
+    margin: 0;
+}
+
+.post-author {
+    color: #01579b;
+    font-weight: bold;
+    margin: 0;
+}
+
+.post-time {
+    color: grey;
+    margin: 0;
+}
+
+.thread-reply {
+    float: right;
+    margin: 0;
+    margin-left: 1em;
+}
+
+.thread-subject {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.postform textarea {
+    min-height: 10em;
+    min-width: 80%;
+    max-width: 80%;
+}
+
+.postform {
+    text-align: center;
+}
+
+.postform p > input {
+    width: 80%;
+}
+
+.postform p > input#fileupload {
+    border: none;
+    padding: 0;
+}
+
+.postform input,
+.postform textarea {
+    padding: 1em;
+    border-radius: 2px;
+    border: 1px solid lightgrey;
+}
+
+.postform input:focus,
+.postform textarea:focus {
+    border-color: #01579b;
+}
+
+.postform .submit {
+    background-color: white;
+    width: 10em;
+    color: #01579b;
+    background-color: transparent;
+    border: 2px solid #01579b;
+    transition-duration: 200ms;
+}
+
+.postform .submit:hover {
+    color: white;
+    background-color: #01579b;
+}
+
+.postform .submit:active {
+    background-color: #01377b;
+}
+
 @media screen and (min-width: 480px) {
     .header {
         flex-direction: row;
@@ -393,6 +475,32 @@ body {
         min-height: 5em;
         margin-top: 1em;
         border-radius: 4px;
+    }
+
+    .postform {
+        width: 30em;
+        margin: auto;
+    }
+
+    .post-time,
+    .post-author,
+    .thread-subject {
+        float: left;
+        margin-right: 1em;
+    }
+
+    .content > div.thread {
+        margin: 0.5em 1em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid lightgrey;
+    }
+
+    .content > div.post {
+        margin: 0.5em 1em;
+        padding: 1em;
+        border-radius: 2px;
+        background-color: #f0f0fa;
+        border: 1px solid lightgrey;
     }
 }
 

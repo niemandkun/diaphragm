@@ -20,7 +20,7 @@
 <div class="fourcolumns">
         <div class="thumbnail">
             <img src="{{ url_for('static', filename=picture) }}"
-                 onclick="showImage(event);"></img>
+                 onclick="showImage(event);">
         </div>
 </div>
 {% endfor %}
@@ -41,7 +41,7 @@
             </ul>
         </div>
         {% if full_size %}
-        <img class="image-full" src={{ url_for('static', filename=full_size) }}></img>
+        <img class="image-full" src="{{ url_for('static', filename=full_size) }}">
         {% endif %}
     </div>
 </div>
