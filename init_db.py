@@ -2,4 +2,5 @@
 
 from diaphragm import application
 
-application.run('0.0.0.0', 8080)
+application.db.drop_all()
+application.db.create_all()

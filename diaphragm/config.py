@@ -5,6 +5,8 @@ class Config:
 
 class ProductionConfig(Config):
     TEMPLATES_AUTO_RELOAD = False
+    SQLALCHEMY_DATABASE_URI = ''
+    SECRET_KEY = ''
     DEBUG = False
 
 

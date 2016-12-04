@@ -1,0 +1,28 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}Counter{% endblock %}
+
+{% block content %}
+<div class="twocolumns">
+    <h3>Site status</h3>
+    <p>Visits today: {{ visits_today }}</p>
+    <p>Visits total: {{ visits_total }}</p>
+    <p>Views today: {{ views_today }}</p>
+    <p>Views total: {{ views_total }}</p>
+</div>
+
+<div class="twocolumns">
+    <h3>Your status</h3>
+    <p>IP address: {{ visitor.ipaddr }}</p>
+    <p>Last seen: {{ visitor.last_visit.strftime('%Y/%m/%d %H:%M:%S') }}</p>
+    <p>Last page loaded: {{ visitor.last_page.replace('/api', '') }}</p>
+    <p>Visits today: {{ visitor.visits_today }}</p>
+    <p>Visits total: {{ visitor.visits_total }}</p>
+    <p>Views today: {{ visitor.views_today }}</p>
+    <p>Views total: {{ visitor.views_total }}</p>
+</div>
+{% endblock %}

@@ -1,16 +1,21 @@
-from flask import render_template, abort, Blueprint
+from flask import render_template, abort, Blueprint, redirect
 
 from diaphragm.utils import render_ajax
 
-root = Blueprint("common", __name__,
+root = Blueprint("root", __name__,
                  static_folder="static",
                  static_url_path="/static/root",
                  template_folder="templates")
 
 
 @root.route('/')
+@root.route('/index')
+def site_root():
+    return redirect('/about')
+
+
 @root.route('/<path:path>')
-def site_root(path=None):
+def any_page(path=None):
     return render_template("welcome.html")
 
 

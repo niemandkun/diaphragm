@@ -12,10 +12,6 @@ def create_app(config):
     app.config.from_object(config)
     app.jinja_env.filters['clean'] = do_clean
 
-    from diaphragm.database import db
-    db.app = app
-    db.init_app(app)
-
     from diaphragm.about.views import about
     app.register_blueprint(about)
 
@@ -27,5 +23,13 @@ def create_app(config):
 
     from diaphragm.board.views import board
     app.register_blueprint(board)
+
+    from diaphragm.counter.views import counter
+    app.register_blueprint(counter)
+
+    from diaphragm.database import db
+    db.app = app
+    db.init_app(app)
+    app.db = db
 
     return app
