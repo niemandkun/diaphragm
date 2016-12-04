@@ -53,9 +53,9 @@ def create_thumbnail(original_path, size=(128,128)):
     if not path.exists(thumbnail_folder):
         makedirs(thumbnail_folder)
 
-    Image.open(original_path)\
-        .thumbnail(size)\
-        .save(thumbnail_path)
+    im = Image.open(original_path)
+    im.thumbnail(size)
+    im.save(thumbnail_path)
 
 
 def create_thumbnails(images):
