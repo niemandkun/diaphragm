@@ -70,8 +70,8 @@ body {
 }
 
 .image-full {
-    width: 100%;
     margin: 0;
+    width: 100%;
     text-align: center;
 }
 
@@ -384,7 +384,6 @@ body {
 
 .thread-subject {
     font-weight: bold;
-    font-size: 1.1em;
     margin: 0;
 }
 
@@ -490,7 +489,7 @@ body {
 
     .image-full {
         margin: 0;
-        width: 100%;
+        width: unset;
         object-fit: scale-down;
         height: 30em;
     }
@@ -513,7 +512,7 @@ body {
     }
 
     .post-header {
-        height: 1.5em;
+        overflow: auto;
     }
 
     .post-time,
