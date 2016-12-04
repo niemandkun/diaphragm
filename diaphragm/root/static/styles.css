@@ -388,6 +388,7 @@ body {
 }
 
 .thread-hidden {
+    clear: left;
     color: grey;
     float: right;
 }
