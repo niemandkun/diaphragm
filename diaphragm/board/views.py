@@ -2,7 +2,7 @@ from flask import abort, Blueprint
 
 from diaphragm.board.forms import ThreadForm, PostForm
 from diaphragm.board.models import Post, Thread, db
-from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload
+from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload, pluralize
 
 board = Blueprint("board", __name__,
                   static_folder="static",
@@ -58,10 +58,11 @@ def create_post(thread, form):
 @board.route("/api/board/<image>")
 def show_board(image=None):
     threads = Thread.query.all()
-    threads = [(t, t.op()) for t in threads]
+    threads = [(t, t.op(), t.posts.count()) for t in threads]
     form = ThreadForm()
     return render_ajax("board.html", threads=threads, form=form,
-                       thumbnail=thumbnail, full_size=image)
+                       thumbnail=thumbnail, full_size=image,
+                       pluralize=pluralize)
 
 
 @board.route("/api/board/thread/<thread_id>")

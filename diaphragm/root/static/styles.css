@@ -387,6 +387,15 @@ body {
     margin: 0;
 }
 
+.thread-hidden {
+    color: grey;
+    float: right;
+}
+
+.thread-hidden > a {
+    color: grey;
+}
+
 .postform textarea {
     min-height: 10em;
     min-width: 80%;

@@ -10,6 +10,14 @@ from werkzeug.utils import secure_filename
 IMAGES_EXT = {'png', 'jpg', 'jpeg', 'gif'}
 
 
+def pluralize(singular, count):
+    if count > 1:
+        if singular.endswith("y"):
+            return singular[:-1] + "ies"
+        return singular + "s"
+    return singular
+
+
 def json_dict(**kwargs):
     return json.dumps(kwargs)
 
