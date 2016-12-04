@@ -19,7 +19,9 @@
 {% for picture in pictures %}
 <div class="fourcolumns">
         <div class="thumbnail">
-            <img src="{{ url_for('static', filename=picture) }}"
+            <img class="preview"
+                 src="{{ url_for('.static', filename=picture) }}"
+                 alt="{{ picture }}"
                  onclick="showImage(event);">
         </div>
 </div>
@@ -41,7 +43,7 @@
             </ul>
         </div>
         {% if full_size %}
-        <img class="image-full" src="{{ url_for('static', filename=full_size) }}">
+        <img class="image-full" src="{{ url_for('.static', filename=full_size) }}">
         {% endif %}
     </div>
 </div>

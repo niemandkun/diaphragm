@@ -211,13 +211,13 @@ function updatePreload() {
 }
 
 document.addEventListener('ajax_reload', function(event) {
-    if (images.length > 0) return;
+    images = [];
 
-    var thumbnails = getByClassName("thumbnail");
+    var thumbnails = getByClassName("preview");
 
     for (var i = 0; i < thumbnails.length; ++i) {
-        var image = thumbnails[i].getElementsByTagName("IMG")[0];
-        images.push(image.src.replace("thumbnails", "gallery"));
+        var image = thumbnails[i];
+        images.push(image.src.replace("/thumbnails", ""));
     }
 }, false);
 
@@ -247,11 +247,19 @@ function resetImageFull() {
 }
 
 function showImage(event) {
+    doShowImage(event.target.src.replace("/thumbnails", ""),
+        document.location.pathname);
+}
+
+function doShowImage(imageSrc, path) {
     var imageFull = resetImageFull();
+    var imageName = basepath(imageSrc);
+
     imageFull.src = "";
-    imageFull.src = event.target.src.replace("thumbnails", "gallery");
-    var path = imageFull.src.replace("/static", "");
-    pushHistory(document.title, path);
+    imageFull.src = imageSrc;
+    imageFull.alt = imageName;
+
+    pushHistory(document.title, path + "/" + imageName);
     setElement("show", "hidden", "visible");
     updatePreload();
 }
@@ -263,8 +271,16 @@ function hideImage(event) {
         return false;
     }
     removeImageFull();
-    pushHistory(document.title, "/gallery");
+    pushHistory(document.title, dirpath(document.location.pathname));
     setElement("show", "visible", "hidden");
+}
+
+function dirpath(path) {
+    return path.replace("/"+basepath(path), '');
+}
+
+function basepath(path) {
+    return path.replace(/^.*[\\\/]/, '');
 }
 
 window.onhelp = function(ev) {
@@ -288,11 +304,7 @@ window.addEventListener("keydown", function(event) {
 
     if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
         var nextImage = (currentImage() + 1) % images.length;
-        var imageFull = resetImageFull();
-        imageFull.src = images[nextImage];
-        var path = imageFull.src.replace("/static", "");
-        pushHistory(document.title, path);
-        updatePreload();
+        doShowImage(images[nextImage], dirpath(document.location.pathname));
         stop(event);
         return false;
     }
@@ -303,10 +315,7 @@ window.addEventListener("keydown", function(event) {
         if (nextImage === -1)
             nextImage += images.length;
 
-        var imageFull = resetImageFull();
-        imageFull.src = images[nextImage];
-        var path = imageFull.src.replace("/static", "");
-        pushHistory(document.title, path);
+        doShowImage(images[nextImage], dirpath(document.location.pathname));
         stop(event);
         return false;
     }

@@ -17,6 +17,12 @@
         <p class="post-id">No.{{ op.id }}</p>
         <p class="post-time">{{ op.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
     </div>
+    {% if op.attachment %}
+    <img class="post-attachment preview"
+         src="{{ url_for('.static', filename=thumbnail(op.attachment)) }}"
+         alt="{{ op.attachment }}"
+         onclick="showImage(event);">
+    {% endif %}
     <div class="post-content">{{ op.message }}</div>
 </div>
 
@@ -27,6 +33,12 @@
         <p class="post-id">No.{{ post.id }}</p>
         <p class="post-time">{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
     </div>
+    {% if post.attachment %}
+    <img class="post-attachment preview"
+         src="{{ url_for('.static', filename=thumbnail(post.attachment)) }}"
+         alt="{{ post.attachment }}"
+         onclick="showImage(event);">
+    {% endif %}
     <div class="post-content">{{ post.message }}</div>
 </div>
 {% endfor %}
@@ -42,6 +54,27 @@
         <input class="submit" type="submit"
             value="Post" onclick="postMessage(event);">
     </form>
+</div>
+
+{% if full_size %}
+<div class="show show-visible" onclick="hideImage(event);">
+{% else %}
+<div class="show show-hidden" onclick="hideImage(event);">
+{% endif %}
+    <div class="popup">
+        <div class="help help-hidden">
+            <h4>Help</h4>
+            <ul>
+                <li><b>F1</b> - help</li>
+                <li><b>Left arrow</b> or <b>a</b> - previous</li>
+                <li><b>Right arrow</b> or <b>d</b> - next</li>
+                <li><b>Escape</b> - close</li>
+            </ul>
+        </div>
+        {% if full_size %}
+        <img class="image-full" src="{{ url_for('.static', filename=full_size) }}">
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}

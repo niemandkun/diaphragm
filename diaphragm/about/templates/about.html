@@ -21,7 +21,7 @@
 
 <div class="avatar twocolumns">
     <div class="expand"></div>
-    <img src="static/avatar.jpg" alt="me">
+    <img src="{{ url_for('about.static', filename='avatar.jpg') }}" alt="me">
     <div class="expand"></div>
 </div>
 
@@ -55,12 +55,6 @@
         and Structure/Systems Biology</a> at Novosibirsk State University
         as a listener.
         There I've learnt a lot about biology.
-    </p>
-    <p>
-        Also, in September 2016 I've attended
-        <a href="http://astro.brics.urfu.ru/en/astrodata2016/">BRICS
-        Astronomy Workshop</a> as a listener interested in astronomical
-        data processing.
     </p>
 </div>
 

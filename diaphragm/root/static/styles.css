@@ -303,8 +303,14 @@ body {
     background-color: transparent;
     text-align: center;
     border: none;
-    margin-top: 4em;
     color: grey;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-flow: column wrap;
+    -ms-flex-flow: column wrap;
+    -webkit-flex-flow: column wrap;
 }
 
 .spinner {
@@ -331,7 +337,8 @@ body {
 }
 
 .post-content {
-    clear: both;
+    clear: right;
+    margin-top: 1em;
 }
 
 .post-id {
@@ -412,6 +419,12 @@ body {
     background-color: #01377b;
 }
 
+.post-attachment {
+    float: left;
+    margin: 1em;
+    cursor: pointer;
+}
+
 @media screen and (min-width: 480px) {
     .header {
         flex-direction: row;
@@ -480,6 +493,10 @@ body {
     .postform {
         width: 30em;
         margin: auto;
+    }
+
+    .post-header {
+        height: 1.5em;
     }
 
     .post-time,
