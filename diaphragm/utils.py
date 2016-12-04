@@ -3,6 +3,7 @@ from datetime import datetime
 from os import path, makedirs
 from subprocess import call
 
+from PIL import Image
 from flask import render_template
 from werkzeug.utils import secure_filename
 
@@ -45,20 +46,16 @@ def safely_upload(uploads_folder, data):
     return filename
 
 
-def create_thumbnail(original_path, size=128):
+def create_thumbnail(original_path, size=(128,128)):
     thumbnail_path = thumbnail(original_path)
     thumbnail_folder = path.dirname(thumbnail_path)
 
     if not path.exists(thumbnail_folder):
         makedirs(thumbnail_folder)
 
-    call([
-        "convert",
-        original_path,
-        "-thumbnail",
-        "{0}x{0}".format(size),
-        thumbnail_path,
-    ])
+    Image.open(original_path)\
+        .thumbnail(size)\
+        .save(thumbnail_path)
 
 
 def create_thumbnails(images):
