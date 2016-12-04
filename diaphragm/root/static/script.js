@@ -329,6 +329,12 @@ window.addEventListener("keydown", function(event) {
 });
 
 function startThread(event) {
+    if (!getById("message").value) {
+        alert("Message body should contain text");
+        stop(event);
+        return false;
+    }
+
     var data = new FormData(getById("postform"));
 
     post("/api/start_thread", data, function(r) {
@@ -341,6 +347,12 @@ function startThread(event) {
 }
 
 function postMessage(event) {
+    if (!getById("message").value) {
+        alert("Message body should contain text");
+        stop(event);
+        return false;
+    }
+
     var data = new FormData(getById("postform"));
     var thread = getById("thread").value;
 

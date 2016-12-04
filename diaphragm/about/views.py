@@ -13,11 +13,6 @@ def about_page():
     return render_ajax("about.html")
 
 
-@about.route("/api/blog")
-def blog_page():
-    return render_ajax("coming_soon.html")
-
-
 @about.route("/api/projects")
 def projects_page():
     return render_ajax("projects.html")
