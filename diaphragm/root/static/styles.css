@@ -15,6 +15,15 @@ a:hover {
     cursor: pointer;
 }
 
+spoiler {
+    background-color: lightgrey;
+    color: lightgrey;
+}
+
+spoiler:hover {
+    color: black;
+}
+
 body {
     margin: 0;
     width: 100%;
@@ -30,7 +39,17 @@ body {
 }
 
 .content > div.show-visible {
-    display: block;
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
+    flex-wrap: nowrap;
 }
 
 .content > div.show-hidden {
@@ -51,10 +70,9 @@ body {
 }
 
 .image-full {
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    margin: 0;
     text-align: center;
-    margin-top: 5em;
 }
 
 .help {
@@ -474,19 +492,18 @@ body {
         margin: 0;
         width: 100%;
         object-fit: scale-down;
-        height: 20em;
+        height: 30em;
     }
 
     .popup {
         background-image: url("gears.svg");
         background-repeat: no-repeat;
         background-position: center;
-        padding: 3em;
-        background-color: white;
+        padding: 1em;
+        background-color: #404040;
         margin: auto;
-        width: 50%;
-        min-height: 5em;
-        margin-top: 1em;
+        min-width: 20%;
+        min-height: 10em;
         border-radius: 4px;
     }
 

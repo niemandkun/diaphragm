@@ -1,12 +1,8 @@
-{% if not standalone %}
-    {% extends "layout.html" %}
-{% else %}
-    {% extends "ajax.json" %}
-{% endif %}
+{% extends "preview.html" %}
 
 {% block title %}/nl/{% endblock %}
 
-{% block content %}
+{% block content_actual %}
 
 <div class="onecolumn thread">
 {% if thread.subject %}
@@ -23,7 +19,7 @@
          alt="{{ op.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ op.message }}</div>
+    <div class="post-content">{{ op.message.replace('\n', '<br/>')|clean }}</div>
 </div>
 
 {% for post in posts %}
@@ -39,7 +35,7 @@
          alt="{{ post.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ post.message }}</div>
+    <div class="post-content">{{ post.message.replace('\n', '<br/>')|clean }}</div>
 </div>
 {% endfor %}
 
@@ -54,27 +50,6 @@
         <input class="submit" type="submit"
             value="Post" onclick="postMessage(event);">
     </form>
-</div>
-
-{% if full_size %}
-<div class="show show-visible" onclick="hideImage(event);">
-{% else %}
-<div class="show show-hidden" onclick="hideImage(event);">
-{% endif %}
-    <div class="popup">
-        <div class="help help-hidden">
-            <h4>Help</h4>
-            <ul>
-                <li><b>F1</b> - help</li>
-                <li><b>Left arrow</b> or <b>a</b> - previous</li>
-                <li><b>Right arrow</b> or <b>d</b> - next</li>
-                <li><b>Escape</b> - close</li>
-            </ul>
-        </div>
-        {% if full_size %}
-        <img class="image-full" src="{{ url_for('.static', filename=full_size) }}">
-        {% endif %}
-    </div>
 </div>
 
 {% endblock %}

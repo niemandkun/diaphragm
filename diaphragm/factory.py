@@ -1,9 +1,16 @@
 from flask import Flask
+from bleach import clean
+from markupsafe import Markup
+
+
+def do_clean(text):
+    return Markup(clean(text, tags=['b', 'i', 'br', 'spoiler']))
 
 
 def create_app(config):
-    app = Flask(__name__, static_folder="static")
+    app = Flask(__name__, static_folder='static')
     app.config.from_object(config)
+    app.jinja_env.filters['clean'] = do_clean
 
     from diaphragm.database import db
     db.app = app

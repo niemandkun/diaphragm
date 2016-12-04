@@ -58,7 +58,7 @@ def create_post(thread, form):
 @board.route("/api/board/<image>")
 def show_board(image=None):
     threads = Thread.query.all()
-    threads = [(t, t.op(), t.last(3)) for t in threads]
+    threads = [(t, t.op()) for t in threads]
     form = ThreadForm()
     return render_ajax("board.html", threads=threads, form=form,
                        thumbnail=thumbnail, full_size=image)

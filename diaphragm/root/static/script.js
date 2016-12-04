@@ -258,6 +258,7 @@ function doShowImage(imageSrc, path) {
     imageFull.src = "";
     imageFull.src = imageSrc;
     imageFull.alt = imageName;
+    imageFull.onclick = hideImage;
 
     pushHistory(document.title, path + "/" + imageName);
     setElement("show", "hidden", "visible");
