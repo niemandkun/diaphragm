@@ -8,7 +8,7 @@
 {% for thread, op, op_message, count in threads %}
 <div class="onecolumn thread">
     <div class="post-header">
-        <p class="thread-reply">[<a href="board/thread/{{ thread.id }}">Reply</a>]</p>
+        <p class="thread-reply">[<a href="/board/thread/{{ thread.id }}">Reply</a>]</p>
         <p class="post-id">No.{{ thread.id }}</p>
         <p class="thread-subject">{{ thread.subject }}</p>
         <p class="post-author">{{ op.author }}</p>
@@ -20,16 +20,29 @@
          alt="{{ op.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ op_message|clean }}</div>
+    <div class="post-content">{{ op_message|boardify }}</div>
     {% if count > 1 %}
     <div class="thread-hidden">
         {{ count - 1 }} {{ pluralize("reply", count-1) }} are hidden.
-        <a href="board/thread/{{ thread.id }}">Click here</a> to view.
+        <a href="/board/thread/{{ thread.id }}">Click here</a> to view.
     </div>
     {% endif %}
 </div>
 
 {% endfor %}
+
+{% if pages > 0 %}
+<div class="onecolumn paginator">
+    Page:
+{% for page in range(pages) %}
+    {% if page == current_page %}
+        [<span class="paginator-item paginator-current">{{ page }}</span>]
+    {% else %}
+        [<a class="paginator-item" href="/board/page/{{ page }}">{{ page }}</a>]
+    {% endif %}
+{% endfor %}
+</div>
+{% endif %}
 
 <div class="onecolumn">
     <form id="postform" class="postform" method="POST">

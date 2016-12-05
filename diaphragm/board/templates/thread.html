@@ -19,7 +19,7 @@
          alt="{{ op.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ op.message|clean }}</div>
+    <div class="post-content">{{ op.message|boardify }}</div>
 </div>
 
 {% for post in posts %}
@@ -35,7 +35,7 @@
          alt="{{ post.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ post.message|clean }}</div>
+    <div class="post-content">{{ post.message|boardify }}</div>
 </div>
 {% endfor %}
 

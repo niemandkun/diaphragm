@@ -1,3 +1,4 @@
+from math import ceil
 from flask import abort, Blueprint
 
 from diaphragm.board.forms import ThreadForm, PostForm
@@ -10,6 +11,11 @@ board = Blueprint("board", __name__,
                   template_folder="templates")
 
 
+BUMP_LIMIT = 500
+PAGES = 3
+THREADS_PER_PAGE = 4
+
+
 @board.route("/api/start_thread", methods=["POST"])
 def start_thread():
     form = ThreadForm()
@@ -19,6 +25,11 @@ def start_thread():
 
     thread = Thread(form.subject.data)
     post = create_post(thread, form)
+
+    if Thread.query.count() >= PAGES * THREADS_PER_PAGE:
+        last_thread = Thread.query.order_by(Thread.bump).first()
+        last_thread.posts.delete()
+        db.session.delete(last_thread)
 
     db.session.add(thread)
     db.session.add(post)
@@ -39,6 +50,11 @@ def post_message():
         abort(404)
 
     post = create_post(thread, form)
+
+    if thread.posts.count() < BUMP_LIMIT:
+        thread.bump = post.time
+        db.session.add(thread)
+
     db.session.add(post)
     db.session.commit()
     return json_dict(post_id=post.id)
@@ -54,16 +70,40 @@ def create_post(thread, form):
         return Post(thread, form.message.data, form.author.data, attachment)
 
 
-@board.route("/api/board")
-@board.route("/api/board/<image>")
-def show_board(image=None):
-    threads = Thread.query.all()
+@board.route("/api/board/page/<page>")
+@board.route("/api/board/page/<page>/<image>")
+def show_board_page(page, image=None):
+    try:
+        page = int(page)
+    except:
+        abort(404)
+
+    threads = Thread.query\
+        .order_by(Thread.bump.desc()) \
+        .limit(THREADS_PER_PAGE) \
+        .offset(page*THREADS_PER_PAGE)\
+        .all()
+
+    if len(threads) == 0 and page != 0:
+        abort(404)
+
     threads = [(t, t.op(), shorten(t.op().message), t.posts.count()) for t in threads]
 
     form = ThreadForm()
+
+    threads_count = Thread.query.count()
+    pages_count = int(ceil(threads_count / float(THREADS_PER_PAGE)))
+
     return render_ajax("board.html", threads=threads, form=form,
                        thumbnail=thumbnail, full_size=image,
-                       pluralize=pluralize)
+                       pluralize=pluralize, pages=pages_count,
+                       current_page=page)
+
+
+@board.route("/api/board")
+@board.route("/api/board/<image>")
+def show_board(image=None):
+    return show_board_page(0, image)
 
 
 @board.route("/api/board/thread/<thread_id>")

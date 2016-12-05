@@ -6,9 +6,11 @@ from diaphragm.database import db
 class Thread(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(80))
+    bump = db.Column(db.DateTime)
 
     def __init__(self, subject):
         self.subject = subject
+        self.bump = datetime.utcnow()
 
     def op(self):
         return self.posts.first()
