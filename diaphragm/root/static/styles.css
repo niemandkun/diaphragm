@@ -367,6 +367,8 @@ body {
     color: grey;
     float: right;
     margin: 0;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .post-author {

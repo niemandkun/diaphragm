@@ -4,13 +4,13 @@
 
 {% block content_actual %}
 
-<div class="onecolumn thread">
+<div id="{{ op.id }}" class="onecolumn thread">
 {% if thread.subject %}
     <h2>{{ thread.subject }}</h2>
 {% endif %}
     <div class="post-header">
         <p class="post-author">{{ op.author }}</p>
-        <p class="post-id">No.{{ op.id }}</p>
+        <p class="post-id" onclick="insertMessage({{ op.id }});">No.{{ op.id }}</p>
         <p class="post-time">{{ op.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
     </div>
     {% if op.attachment %}
@@ -23,10 +23,10 @@
 </div>
 
 {% for post in posts %}
-<div class="onecolumn post">
+<div id="{{ post.id }}" class="onecolumn post">
     <div class="post-header">
         <p class="post-author">{{ post.author }}</p>
-        <p class="post-id">No.{{ post.id }}</p>
+        <p class="post-id" onclick="insertMessage({{ post.id }});">No.{{ post.id }}</p>
         <p class="post-time">{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
     </div>
     {% if post.attachment %}

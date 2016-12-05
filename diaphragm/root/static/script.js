@@ -29,8 +29,14 @@ function findParent(tagname,el){
 }
 
 window.onclick = function(ev) {
-    var target = findParent('a', ev.target || ev.srcElement)
+    var target = findParent('a', ev.target || ev.srcElement);
     if (target && ev.button == 0) {
+        if (target.hash) {
+            pushHistory(document.title, target.href);
+            jump(target.hash.substr(1));
+            stop(ev);
+            return false;
+        }
         if (target.host == document.location.host) {
             stop(ev);
             ref(target.pathname);
@@ -38,6 +44,15 @@ window.onclick = function(ev) {
         }
     }
     return true;
+}
+
+function jump(id) {
+    var element = document.getElementById(id);
+
+    if (element) {
+        var top = element.offsetTop;
+        window.scrollTo(0, top - 100);
+    }
 }
 
 function stop(event) {
@@ -362,4 +377,12 @@ function postMessage(event) {
 
     stop(event);
     return false;
+}
+
+function insertMessage(str) {
+    var message = getById("message");
+
+    if (message) {
+        message.value += ">>" + str;
+    }
 }
