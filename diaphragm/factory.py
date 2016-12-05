@@ -4,7 +4,7 @@ from bleach import clean
 from markupsafe import Markup
 
 
-GREEN_TEXT = re.compile(r'\>[^\n]*\n')
+GREEN_TEXT = re.compile(r'\>[^\n]*')
 
 
 def do_clean(text):
