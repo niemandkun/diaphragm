@@ -10,6 +10,15 @@ from werkzeug.utils import secure_filename
 IMAGES_EXT = {'png', 'jpg', 'jpeg', 'gif'}
 
 
+def shorten(text, max_lines=8, max_chars=500):
+    short = '\n'.join(text[:max_chars].split('\n')[:max_lines])
+
+    if len(short) != len(text):
+        short += ' ...'
+
+    return short
+
+
 def pluralize(singular, count):
     if count > 1:
         if singular.endswith("y"):
