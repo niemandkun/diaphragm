@@ -5,7 +5,7 @@
 
 {% block content_actual %}
 
-{% for thread, op, count in threads %}
+{% for thread, op, op_message, count in threads %}
 <div class="onecolumn thread">
     <div class="post-header">
         <p class="thread-reply">[<a href="board/thread/{{ thread.id }}">Reply</a>]</p>
@@ -20,7 +20,7 @@
          alt="{{ op.attachment }}"
          onclick="showImage(event);">
     {% endif %}
-    <div class="post-content">{{ op.message.replace('\n', '<br/>')|clean }}</div>
+    <div class="post-content">{{ op_message|clean }}</div>
     {% if count > 1 %}
     <div class="thread-hidden">
         {{ count - 1 }} {{ pluralize("reply", count-1) }} are hidden.

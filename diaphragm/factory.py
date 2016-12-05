@@ -1,10 +1,19 @@
+import re
 from flask import Flask
 from bleach import clean
 from markupsafe import Markup
 
 
+GREEN_TEXT = re.compile(r'\>[^\n]*\n')
+
+
 def do_clean(text):
-    return Markup(clean(text, tags=['b', 'i', 'br', 'spoiler']))
+    for green_text in GREEN_TEXT.findall(text):
+        print(green_text)
+        text = text.replace(green_text, '<green>{}</green>'.format(green_text))
+
+    text = text.replace('\n', '<br/>')
+    return Markup(clean(text, tags=['b', 'i', 'br', 'spoiler', 'green']))
 
 
 def create_app(config):
