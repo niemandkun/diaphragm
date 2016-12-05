@@ -19,14 +19,6 @@ def shorten(text, max_lines=8, max_chars=500):
     return short
 
 
-def pluralize(singular, count):
-    if count > 1:
-        if singular.endswith("y"):
-            return singular[:-1] + "ies"
-        return singular + "s"
-    return singular
-
-
 def json_dict(**kwargs):
     return json.dumps(kwargs)
 

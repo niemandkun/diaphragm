@@ -3,7 +3,7 @@ from flask import abort, Blueprint
 
 from diaphragm.board.forms import ThreadForm, PostForm
 from diaphragm.board.models import Post, Thread, db
-from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload, pluralize, shorten
+from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload, shorten
 
 board = Blueprint("board", __name__,
                   static_folder="static",
@@ -87,7 +87,7 @@ def show_board_page(page, image=None):
     if len(threads) == 0 and page != 0:
         abort(404)
 
-    threads = [(t, t.op(), shorten(t.op().message), t.posts.count()) for t in threads]
+    threads = [(t, t.op(), shorten(t.op().message), t.posts.count()-1) for t in threads]
 
     form = ThreadForm()
 
@@ -96,8 +96,7 @@ def show_board_page(page, image=None):
 
     return render_ajax("board.html", threads=threads, form=form,
                        thumbnail=thumbnail, full_size=image,
-                       pluralize=pluralize, pages=pages_count,
-                       current_page=page)
+                       pages=pages_count, current_page=page)
 
 
 @board.route("/api/board")

@@ -21,9 +21,9 @@
          onclick="showImage(event);">
     {% endif %}
     <div class="post-content">{{ op_message|boardify }}</div>
-    {% if count > 1 %}
+    {% if count > 0 %}
     <div class="thread-hidden">
-        {{ count - 1 }} {{ pluralize("reply", count-1) }} are hidden.
+        {{ count }} {% if count > 1 %} replies are {% else %} reply is {% endif %} hidden.
         <a href="/board/thread/{{ thread.id }}">Click here</a> to view.
     </div>
     {% endif %}
