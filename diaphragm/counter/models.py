@@ -25,7 +25,7 @@ class Visitor(db.Model):
 
     @staticmethod
     def total_visits():
-        return db.session.query(func.sum(Visitor.visits_total)).all()[0][0]
+        return db.session.query(func.sum(Visitor.visits_total)).scalar()
 
     @staticmethod
     def total_today_visits():
@@ -34,7 +34,7 @@ class Visitor(db.Model):
 
     @staticmethod
     def total_views():
-        return db.session.query(func.sum(Visitor.views_total)).all()[0][0]
+        return db.session.query(func.sum(Visitor.views_total)).scalar()
 
     @staticmethod
     def total_today_views():
