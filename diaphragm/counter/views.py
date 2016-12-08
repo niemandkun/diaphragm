@@ -34,9 +34,9 @@ def accept_visitor():
         db.session.commit()
         return
 
-    if visitor.last_visit.date() > datetime.today().date():
-        visitor.visits_today = 0
-        visitor.views_today = 0
+    if visitor.last_visit.date() < datetime.today().date():
+        visitor.visits_today = 1
+        visitor.views_today = 1
         db.session.add(visitor)
         db.session.commit()
 
@@ -63,7 +63,7 @@ def count_visitor(r):
         visitor.visits_today += 1
         visitor.visits_total += 1
 
-    if (visitor.last_page != request.path):
+    if visitor.last_page != request.path:
         visitor.views_today += 1
         visitor.views_total += 1
 
