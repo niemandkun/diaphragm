@@ -135,6 +135,7 @@ def get_new_posts(thread_id, last_post_id):
     return render_ajax("posts.html", posts=posts,
                        thumbnail=thumbnail)
 
+
 @board.route("/board/download/<thread_id>")
 def download_thread(thread_id):
     thread = Thread.query.filter(Thread.id == thread_id).first()
