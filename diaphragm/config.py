@@ -1,4 +1,5 @@
 class Config:
+    MAX_CONTENT_LENGTH = 8 * 1024 * 1024
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
 

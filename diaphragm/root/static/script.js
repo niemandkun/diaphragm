@@ -344,8 +344,36 @@ window.addEventListener("keydown", function(event) {
 });
 
 function startThread(event) {
-    if (!getById("message").value) {
-        alert("Message body should contain text");
+    var message = getById("message");
+
+    if (!message.value) {
+        showFormError("Message body should contain text.");
+        stop(event);
+        return false;
+    }
+
+    if (message.value.length > 5000) {
+        showFormError("Message body is too large. Limit is 5000 characters.");
+        stop(event);
+        return false;
+    }
+
+    if (getById("subject").value.length > 80) {
+        showFormError("Subject is too large. Limit is 80 characters.");
+        stop(event);
+        return false;
+    }
+
+    if (getById("author").value.length > 80) {
+        showFormError("Author name is too large. Limit is 80 characters.");
+        stop(event);
+        return false;
+    }
+
+    var file = getById("fileupload").files[0];
+
+    if (file && file.size > 8 * 1024 * 1024) {
+        showFormError("Attachment is too large. Limit is 8 Mb.");
         stop(event);
         return false;
     }
@@ -362,8 +390,30 @@ function startThread(event) {
 }
 
 function postMessage(event) {
-    if (!getById("message").value) {
-        alert("Message body should contain text");
+    var message = getById("message");
+
+    if (!message.value) {
+        showFormError("Message body should contain text.");
+        stop(event);
+        return false;
+    }
+
+    if (message.value.length > 5000) {
+        showFormError("Message body is too large. Limit is 5000 characters.");
+        stop(event);
+        return false;
+    }
+
+    if (getById("author").value.length > 80) {
+        showFormError("Author name is too large. Limit is 80 characters.");
+        stop(event);
+        return false;
+    }
+
+    var file = getById("fileupload").files[0];
+
+    if (file && file.size > 8 * 1024 * 1024) {
+        showFormError("Attachment is too large. Limit is 8 Mb.");
         stop(event);
         return false;
     }
@@ -377,6 +427,11 @@ function postMessage(event) {
 
     stop(event);
     return false;
+}
+
+function showFormError(msg) {
+    var error = getById("formerror");
+    error.innerHTML = msg;
 }
 
 function insertMessage(str) {

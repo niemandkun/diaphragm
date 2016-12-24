@@ -9,7 +9,7 @@ class Thread(db.Model):
     bump = db.Column(db.DateTime)
 
     def __init__(self, subject):
-        self.subject = subject
+        self.subject = subject.strip()
         self.bump = datetime.utcnow()
 
     def op(self):
@@ -38,9 +38,9 @@ class Post(db.Model):
             time = datetime.utcnow()
 
         self.attachment = attachment
-        self.message = message
+        self.message = message.strip()
+        self.author = author.strip()
         self.thread = thread
-        self.author = author
         self.time = time
 
     def __repr__(self):

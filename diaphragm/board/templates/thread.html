@@ -43,10 +43,14 @@
     <form id="postform" class="postform" method="POST">
         <h3>Post a reply</h3>
         {{ form.csrf_token }}
+
         <p>{{ form.thread }}</p>
         <p>{{ form.author }}</p>
         <p>{{ form.message }}</p>
         <p>{{ form.fileupload }}</p>
+
+        <p id="formerror" class="formerror"></p>
+
         <input class="submit" type="submit"
             value="Post" onclick="postMessage(event);">
     </form>
