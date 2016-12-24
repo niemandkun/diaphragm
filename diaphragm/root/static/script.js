@@ -30,7 +30,8 @@ function findParent(tagname,el){
 
 window.onclick = function(ev) {
     var target = findParent('a', ev.target || ev.srcElement);
-    if (target && ev.button == 0) {
+
+    if (target && !target.download && ev.button == 0) {
         if (target.hash) {
             pushHistory(document.title, target.href);
             jump(target.hash.substr(1));
@@ -347,13 +348,13 @@ function startThread(event) {
     var message = getById("message");
 
     if (!message.value) {
-        showFormError("Message body should contain text.");
+        showFormError("Message should contain text.");
         stop(event);
         return false;
     }
 
     if (message.value.length > 5000) {
-        showFormError("Message body is too large. Limit is 5000 characters.");
+        showFormError("Message is too large. Limit is 5000 characters.");
         stop(event);
         return false;
     }
@@ -393,13 +394,13 @@ function postMessage(event) {
     var message = getById("message");
 
     if (!message.value) {
-        showFormError("Message body should contain text.");
+        showFormError("Message should contain text.");
         stop(event);
         return false;
     }
 
     if (message.value.length > 5000) {
-        showFormError("Message body is too large. Limit is 5000 characters.");
+        showFormError("Message is too large. Limit is 5000 characters.");
         stop(event);
         return false;
     }

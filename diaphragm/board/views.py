@@ -1,5 +1,7 @@
 from math import ceil
 from flask import abort, Blueprint
+from flask import make_response
+from flask import render_template
 
 from diaphragm.board.forms import ThreadForm, PostForm
 from diaphragm.board.models import Post, Thread, db
@@ -132,3 +134,20 @@ def get_new_posts(thread_id, last_post_id):
 
     return render_ajax("posts.html", posts=posts,
                        thumbnail=thumbnail)
+
+@board.route("/board/download/<thread_id>")
+def download_thread(thread_id):
+    thread = Thread.query.filter(Thread.id == thread_id).first()
+
+    if not thread:
+        abort(404)
+
+    op = thread.op()
+    posts = thread.posts.filter(Post.id != op.id)
+
+    xml = render_template("xml-template.html", posts=posts, op=op, thread=thread)
+
+    response = make_response(xml)
+    response.headers["Content-Disposition"] = "attachment; filename=thread-{}.xml".format(thread_id)
+
+    return response

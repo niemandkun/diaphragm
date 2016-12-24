@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<thread id="{{ thread.id }}"{% if thread.subject %}
+        subject="{{ thread.subject }}"{% endif %}>
+
+    <post id="{{ op.id }}"
+          time="{{ op.time.strftime('%Y/%m/%d %H:%M:%S') }}"
+          author="{{ op.author }}"{% if op.attachment %}
+          attachment="{{ op.attachment }}"{% endif %}>
+        {{ op.message|boardify }}
+    </post>
+{% for post in posts %}
+    <post id="{{ post.id }}"
+          time="{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}"
+          author="{{ post.author }}"{% if post.attachment %}
+          attachment="{{ post.attachment }}"{% endif %}>
+        {{ post.message|boardify }}
+    </post>
+{% endfor %}
+</thread>
