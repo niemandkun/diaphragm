@@ -9,7 +9,7 @@
           dislikes="{{ op.dislikes.count() }}"
           author="{{ op.author }}"{% if op.attachment %}
           attachment="{{ op.attachment }}"{% endif %}>
-        {{ op.message.replace('\n', '<br/>')|safe }}
+        {{ op.message }}
     </post>
 {% for post in posts %}
     <post id="{{ post.id }}"
@@ -18,7 +18,7 @@
           dislikes="{{ post.dislikes.count() }}"
           author="{{ post.author }}"{% if post.attachment %}
           attachment="{{ post.attachment }}"{% endif %}>
-        {{ post.message.replace('\n', '<br/>')|safe }}
+        {{ post.message }}
     </post>
 {% endfor %}
 </thread>
