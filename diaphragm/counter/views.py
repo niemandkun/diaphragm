@@ -41,7 +41,7 @@ def accept_visitor():
         db.session.commit()
 
     if is_too_fast(visitor):
-        return json_dict(content="Wait-wait! You click too fast!", title="Fast")
+        return json_dict(content="Server overload! You're clicking too fast!", title="Fast")
 
 
 def is_too_fast(visitor):
