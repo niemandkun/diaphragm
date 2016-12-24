@@ -456,9 +456,14 @@ body {
     background-color: #01377b;
 }
 
+.formerror {
+    color: orange;
+}
+
 .post-attachment {
     float: left;
     margin: 1em;
+    margin-left: 0;
     cursor: pointer;
 }
 
