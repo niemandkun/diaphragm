@@ -6,7 +6,7 @@
 {% block content_actual %}
 
 {% for thread, op, op_message, count in threads %}
-<div class="onecolumn thread">
+<div class="onecolumn thread" onmouseenter="updateLikes(event, {{ op.id }});">
     <div class="post-header">
         <p class="thread-reply">[<a href="/board/thread/{{ thread.id }}">Reply</a>]</p>
         <p class="post-id">No.{{ thread.id }}</p>
@@ -21,6 +21,12 @@
          onclick="showImage(event);">
     {% endif %}
     <div class="post-content">{{ op_message|boardify }}</div>
+
+    <div class="post-footer">
+        <p id="dislikes{{ op.id }}" class="post-dislikes" onclick="doDislike(event, {{ op.id }});">{{ op.dislikes.count() }}</p>
+        <p id="likes{{ op.id }}" class="post-likes" onclick="doLike(event, {{ op.id }});">{{ op.likes.count() }}</p>
+    </div>
+
     {% if count > 0 %}
     <div class="thread-hidden">
         {{ count }} {% if count > 1 %} replies are {% else %} reply is {% endif %} hidden.

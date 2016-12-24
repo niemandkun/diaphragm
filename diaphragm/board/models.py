@@ -19,6 +19,26 @@ class Thread(db.Model):
         return self.posts.order_by(Post.id.desc()).limit(count)
 
 
+class Like(db.Model):
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), primary_key=True)
+    post = db.relationship('Post', backref=db.backref('likes', lazy='dynamic'))
+    ip_address = db.Column(db.String(80), primary_key=True, nullable=False)
+
+    def __init__(self, post_id, ip_address):
+        self.post_id = post_id
+        self.ip_address = ip_address
+
+
+class Dislike(db.Model):
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), primary_key=True)
+    post = db.relationship('Post', backref=db.backref('dislikes', lazy='dynamic'))
+    ip_address = db.Column(db.String(80), primary_key=True, nullable=False)
+
+    def __init__(self, post_id, ip_address):
+        self.post_id = post_id
+        self.ip_address = ip_address
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.String(80))
@@ -27,8 +47,7 @@ class Post(db.Model):
     time = db.Column(db.DateTime)
 
     thread_id = db.Column(db.Integer, db.ForeignKey('thread.id'))
-    thread = db.relationship('Thread',
-            backref=db.backref('posts', lazy='dynamic'))
+    thread = db.relationship('Thread', backref=db.backref('posts', lazy='dynamic'))
 
     def __init__(self, thread, message, author=None, attachment=None, time=None):
         if not author:

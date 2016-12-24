@@ -509,3 +509,22 @@ function autoUpdate() {
         resetLastAutoupdateId();
     });
 }
+
+function doLike(event, postId) {
+    post("/ajaxapi/board/like/" + postId, "", function(r) {
+        event.target.innerHTML = r.count;
+    });
+}
+
+function doDislike(event, postId) {
+    post("/ajaxapi/board/dislike/" + postId, "", function(r) {
+        event.target.innerHTML = r.count;
+    });
+}
+
+function updateLikes(event, postId) {
+    get("/ajaxapi/board/likes/" + postId, function(r) {
+        getById("likes" + postId).innerHTML = r.likes_count;
+        getById("dislikes" + postId).innerHTML = r.dislikes_count;
+    });
+}

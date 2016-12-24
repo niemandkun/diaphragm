@@ -4,7 +4,8 @@
 
 {% block content_actual %}
 
-<div id="{{ op.id }}" class="onecolumn thread autoupdate_target">
+<div id="{{ op.id }}" class="onecolumn thread autoupdate_target"
+     onmouseenter="updateLikes(event, {{ op.id }});">
 {% if thread.subject %}
     <h2>{{ thread.subject }}</h2>
 {% endif %}
@@ -20,10 +21,18 @@
          onclick="showImage(event);">
     {% endif %}
     <div class="post-content">{{ op.message|boardify }}</div>
+
+    <div class="post-footer">
+        <p id="dislikes{{ op.id }}" class="post-dislikes" onclick="doDislike(event, {{ op.id }});">{{ op.dislikes.count() }}</p>
+        <p id="likes{{ op.id }}" class="post-likes" onclick="doLike(event, {{ op.id }});">{{ op.likes.count() }}</p>
+    </div>
+
 </div>
 
 {% for post in posts %}
-<div id="{{ post.id }}" class="onecolumn post autoupdate_target">
+<div id="{{ post.id }}" class="onecolumn post autoupdate_target"
+     onmouseenter="updateLikes(event, {{ post.id }});">
+
     <div class="post-header">
         <p class="post-author">{{ post.author }}</p>
         <p class="post-id" onclick="insertMessage({{ post.id }});">No.{{ post.id }}</p>
@@ -36,6 +45,12 @@
          onclick="showImage(event);">
     {% endif %}
     <div class="post-content">{{ post.message|boardify }}</div>
+
+    <div class="post-footer">
+        <p id="dislikes{{ post.id }}" class="post-dislikes" onclick="doDislike(event, {{ post.id }});">{{ post.dislikes.count() }}</p>
+        <p id="likes{{ post.id }}" class="post-likes" onclick="doLike(event, {{ post.id }});">{{ post.likes.count() }}</p>
+    </div>
+
 </div>
 {% endfor %}
 

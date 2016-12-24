@@ -2,9 +2,11 @@ from math import ceil
 from flask import abort, Blueprint
 from flask import make_response
 from flask import render_template
+from flask import request
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 
 from diaphragm.board.forms import ThreadForm, PostForm
-from diaphragm.board.models import Post, Thread, db
+from diaphragm.board.models import Post, Thread, db, Like, Dislike
 from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload, shorten
 
 board = Blueprint("board", __name__,
@@ -152,3 +154,46 @@ def download_thread(thread_id):
     response.headers["Content-Disposition"] = "attachment; filename=thread-{}.xml".format(thread_id)
 
     return response
+
+
+@board.route("/ajaxapi/board/like/<post_id>", methods=['POST'])
+def like(post_id):
+    return do_like_or_dislike(post_id, Like, lambda p: p.likes)
+
+
+@board.route("/ajaxapi/board/dislike/<post_id>", methods=['POST'])
+def dislike(post_id):
+    return do_like_or_dislike(post_id, Dislike, lambda p: p.dislikes)
+
+
+@board.route("/ajaxapi/board/likes/<post_id>", methods=['GET'])
+def get_likes(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+
+    if not post:
+        abort(404)
+
+    return json_dict(likes_count=post.likes.count(),
+                     dislikes_count=post.dislikes.count())
+
+
+def do_like_or_dislike(post_id, factory, ret):
+    ip_addr = request.environ.get('REMOTE_ADDR')
+    post = Post.query.filter(Post.id == post_id).first()
+
+    if not post:
+        abort(404)
+
+    like = factory(post_id, ip_addr)
+    db.session.add(like)
+
+    try:
+        db.session.commit()
+    except (IntegrityError, InvalidRequestError):
+        db.session.rollback()
+
+        like = ret(post).filter(factory.ip_address == ip_addr).scalar()
+        db.session.delete(like)
+        db.session.commit()
+
+    return json_dict(count=ret(post).count())

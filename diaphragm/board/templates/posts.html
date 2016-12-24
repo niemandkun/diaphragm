@@ -20,5 +20,10 @@
          onclick="showImage(event);">
     {% endif %}
     <div class="post-content">{{ post.message|boardify }}</div>
+
+    <div class="post-footer">
+        <p class="post-dislikes" onclick="doDislike(event, {{ post.id }});">{{ post.dislikes.count() }}</p>
+        <p class="post-likes" onclick="doLike(event, {{ post.id }});">{{ post.likes.count() }}</p>
+    </div>
 </div>
 {% endfor %}{% endblock %}

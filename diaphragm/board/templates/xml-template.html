@@ -5,6 +5,8 @@
 
     <post id="{{ op.id }}"
           time="{{ op.time.strftime('%Y/%m/%d %H:%M:%S') }}"
+          likes="{{ op.likes.count() }}"
+          dislikes="{{ op.dislikes.count() }}"
           author="{{ op.author }}"{% if op.attachment %}
           attachment="{{ op.attachment }}"{% endif %}>
         {{ op.message|boardify }}
@@ -12,6 +14,8 @@
 {% for post in posts %}
     <post id="{{ post.id }}"
           time="{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}"
+          likes="{{ post.likes.count() }}"
+          dislikes="{{ post.dislikes.count() }}"
           author="{{ post.author }}"{% if post.attachment %}
           attachment="{{ post.attachment }}"{% endif %}>
         {{ post.message|boardify }}
