@@ -388,14 +388,18 @@ body {
 
 .post-footer {
     overflow: auto;
+    width: 100%;
 }
 
 .post-likes, .post-dislikes {
     float: right;
     cursor: pointer;
     margin: 0;
-    margin-left: 2em;
     color: grey;
+}
+
+.post-dislikes {
+    margin-left: 2em;
 }
 
 .post-likes::before {
