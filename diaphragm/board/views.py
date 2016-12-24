@@ -119,3 +119,16 @@ def show_thread(thread_id, image=None):
     return render_ajax("thread.html", op=op, thread=thread,
                        posts=posts, form=form,
                        thumbnail=thumbnail, full_size=image)
+
+
+@board.route("/ajaxapi/board/thread/<thread_id>/new/<last_post_id>")
+def get_new_posts(thread_id, last_post_id):
+    thread = Thread.query.filter(Thread.id == thread_id).first()
+
+    if not thread:
+        abort(404)
+
+    posts = thread.posts.filter(Post.id > last_post_id)
+
+    return render_ajax("posts.html", posts=posts,
+                       thumbnail=thumbnail)

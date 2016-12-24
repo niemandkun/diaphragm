@@ -77,7 +77,7 @@ def count_visitor(r):
 
 
 def get_current_visitor():
-    if not request.path.startswith('/api') or request.path.startswith('/static'):
+    if not request.path.startswith('/api'):
         return None, None
 
     ip = request.environ.get('REMOTE_ADDR')

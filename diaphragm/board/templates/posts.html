@@ -1,0 +1,24 @@
+{% if not standalone %}
+    {% extends "layout.html" %}
+{% else %}
+    {% extends "ajax.json" %}
+{% endif %}
+
+{% block title %}{% endblock %}
+
+{% block content %}{% for post in posts %}
+<div id="{{ post.id }}" class="onecolumn post autoupdate_target">
+    <div class="post-header">
+        <p class="post-author">{{ post.author }}</p>
+        <p class="post-id" onclick="insertMessage({{ post.id }});">No.{{ post.id }}</p>
+        <p class="post-time">{{ post.time.strftime('%Y/%m/%d %H:%M:%S') }}</p>
+    </div>
+    {% if post.attachment %}
+    <img class="post-attachment preview"
+         src="{{ url_for('.static', filename=thumbnail(post.attachment)) }}"
+         alt="{{ post.attachment }}"
+         onclick="showImage(event);">
+    {% endif %}
+    <div class="post-content">{{ post.message|boardify }}</div>
+</div>
+{% endfor %}{% endblock %}

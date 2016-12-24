@@ -441,3 +441,70 @@ function insertMessage(str) {
         message.value += ">>" + str;
     }
 }
+
+autoupdateLastId = null;
+autoupdateHandler = null;
+
+document.addEventListener('ajax_reload', function() { resetLastAutoupdateId(); });
+
+function resetLastAutoupdateId() {
+    var autoupdateTargets = getByClassName("autoupdate_target");
+
+    autoupdateLastId = null;
+
+    if (autoupdateTargets.length == 0) {
+        if (autoupdateHandler) {
+            clearInterval(autoupdateHandler);
+            autoupdateHandler = null;
+        }
+        return;
+    }
+
+    for (var i = 0; i < autoupdateTargets.length; ++i) {
+        var id = parseInt(autoupdateTargets[i].id);
+
+        if (id > autoupdateLastId)
+            autoupdateLastId = id;
+    }
+
+    if (!autoupdateHandler)
+        autoupdateHandler = setInterval(function() { autoUpdate(); }, 5000);
+}
+
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+function htmlToDomElements(html) {
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.childNodes;
+}
+
+function autoUpdate() {
+    var thread = thread = getById("thread").value;
+
+    get("/ajaxapi/board/thread/" + thread + "/new/" + autoupdateLastId, function (r) {
+
+        var nodes = htmlToDomElements(r.content);
+
+        var lastElement = getById(autoupdateLastId);
+
+        var _nodes = [];
+
+        for (var i = 0; i < nodes.length; ++i) {
+            _nodes.push(nodes[i]);
+        }
+
+        for (var i = 0; i < _nodes.length; ++i) {
+
+            if (!_nodes[i].className || _nodes[i].className.indexOf("autoupdate_target") == -1)
+                continue;
+
+            insertAfter(_nodes[i], lastElement);
+            lastElement = _nodes[i];
+        }
+
+        resetLastAutoupdateId();
+    });
+}

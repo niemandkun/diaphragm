@@ -4,7 +4,7 @@
 
 {% block content_actual %}
 
-<div id="{{ op.id }}" class="onecolumn thread">
+<div id="{{ op.id }}" class="onecolumn thread autoupdate_target">
 {% if thread.subject %}
     <h2>{{ thread.subject }}</h2>
 {% endif %}
@@ -23,7 +23,7 @@
 </div>
 
 {% for post in posts %}
-<div id="{{ post.id }}" class="onecolumn post">
+<div id="{{ post.id }}" class="onecolumn post autoupdate_target">
     <div class="post-header">
         <p class="post-author">{{ post.author }}</p>
         <p class="post-id" onclick="insertMessage({{ post.id }});">No.{{ post.id }}</p>
@@ -38,6 +38,8 @@
     <div class="post-content">{{ post.message|boardify }}</div>
 </div>
 {% endfor %}
+
+<span id="autoupdate_insert"></span>
 
 <div class="onecolumn">
     <form id="postform" class="postform" method="POST">
