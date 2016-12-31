@@ -1,6 +1,8 @@
 import re
 
 from bleach import clean
+from flask import make_response
+from flask import render_template
 from markupsafe import Markup
 
 
@@ -22,3 +24,12 @@ def boardify(text):
 
     text = text.replace('\n', '<br/>')
     return Markup(clean(text, tags=['b', 'i', 'br', 'spoiler', 'green', 'a']))
+
+
+def send_xml(threads, filename):
+    xml = render_template("xml-template.html", threads=threads)
+
+    response = make_response(xml)
+    response.headers["Content-Disposition"] = "attachment; filename={}".format(filename)
+
+    return response

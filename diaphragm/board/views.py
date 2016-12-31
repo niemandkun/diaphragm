@@ -1,13 +1,14 @@
 from math import ceil
+
 from flask import abort, Blueprint
-from flask import make_response
-from flask import render_template
 from flask import request
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 
 from diaphragm.board.forms import ThreadForm, PostForm
 from diaphragm.board.models import Post, Thread, db, Like, Dislike
+from diaphragm.board.utils import send_xml
 from diaphragm.utils import render_ajax, json_dict, thumbnail, safely_upload, shorten
+
 
 board = Blueprint("board", __name__,
                   static_folder="static",
@@ -145,15 +146,13 @@ def download_thread(thread_id):
     if not thread:
         abort(404)
 
-    op = thread.op()
-    posts = thread.posts.filter(Post.id != op.id)
+    return send_xml([(thread, thread.posts.all())], "thread-{}.xml".format(thread_id))
 
-    xml = render_template("xml-template.html", posts=posts, op=op, thread=thread)
 
-    response = make_response(xml)
-    response.headers["Content-Disposition"] = "attachment; filename=thread-{}.xml".format(thread_id)
-
-    return response
+@board.route("/board/download/all")
+def download_all():
+    threads = ((thread, thread.posts.all()) for thread in Thread.query.all())
+    return send_xml(threads, "threads-all.xml")
 
 
 @board.route("/ajaxapi/board/like/<post_id>", methods=['POST'])
