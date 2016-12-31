@@ -1,5 +1,3 @@
-var httpRequest = new XMLHttpRequest();
-
 window.onload = function() {
     ref(document.location.pathname);
 }
@@ -90,8 +88,9 @@ function post(url, data, callback) {
 }
 
 function request(method, url, data, callback) {
+    var httpRequest = new XMLHttpRequest();
     httpRequest.abort();
-    httpRequest.onreadystatechange = handleResponse(callback);
+    httpRequest.onreadystatechange = handleResponse(callback, httpRequest);
     httpRequest.open(method, url, true);
 
     if (data) {
@@ -101,7 +100,7 @@ function request(method, url, data, callback) {
     }
 }
 
-function handleResponse(callback) {
+function handleResponse(callback, httpRequest) {
     return function() {
 
         var done = 4;
